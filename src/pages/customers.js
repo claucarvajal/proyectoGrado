@@ -10,6 +10,8 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { CustomersTable } from 'src/sections/customer/customers-table';
 import { CustomersSearch } from 'src/sections/customer/customers-search';
 import { applyPagination } from 'src/utils/apply-pagination';
+import { supabase } from 'src/supabase/client';
+import { VacunacionTable } from 'src/sections/vacunacion/vacunacion-table';
 
 const now = new Date();
 
@@ -156,10 +158,10 @@ const data = [
   }
 ];
 
-const useCustomers = (page, rowsPerPage) => {
+const useCustomers = (vacunacion,page, rowsPerPage) => {
   return useMemo(
     () => {
-      return applyPagination(data, page, rowsPerPage);
+      return applyPagination(vacunacion, page, rowsPerPage);
     },
     [page, rowsPerPage]
   );
@@ -174,10 +176,32 @@ const useCustomerIds = (customers) => {
   );
 };
 
-const Page = () => {
+export async function getServerSideProps() {
+  try {
+    const { data, error } = await supabase
+      .from('vacunacion')
+      .select('*');
+
+    return {
+      props: {
+        vacunacion: data,
+        error: error
+      }
+    };
+  } catch (error) {
+    return {
+      props: {
+        vacunacion: null,
+        error: error.message
+      }
+    };
+  }
+}
+
+const Page = ({ vacunacion, error }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const customers = useCustomers(page, rowsPerPage);
+  const customers = useCustomers(vacunacion,page, rowsPerPage);
   const customersIds = useCustomerIds(customers);
   const customersSelection = useSelection(customersIds);
 
@@ -187,6 +211,8 @@ const Page = () => {
     },
     []
   );
+  
+
 
   const handleRowsPerPageChange = useCallback(
     (event) => {
@@ -218,7 +244,7 @@ const Page = () => {
             >
               <Stack spacing={1}>
                 <Typography variant="h4">
-                  Customers
+                  Listado Bebes
                 </Typography>
                 <Stack
                   alignItems="center"
@@ -261,7 +287,7 @@ const Page = () => {
               </div>
             </Stack>
             <CustomersSearch />
-            <CustomersTable
+            <VacunacionTable
               count={data.length}
               items={customers}
               onDeselectAll={customersSelection.handleDeselectAll}

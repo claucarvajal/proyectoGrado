@@ -135,6 +135,9 @@ const Page = () => {
                 onSubmit={formik.handleSubmit}
               >
                 <Stack spacing={3}>
+                  {
+                    process.env.REACT_APP_SUPABASE_URL
+                  }
                   <TextField
                     error={!!(formik.touched.email && formik.errors.email)}
                     fullWidth

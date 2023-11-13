@@ -17,7 +17,7 @@ const Page = () => (
   <>
     <Head>
       <title>
-        Overview | Devias Kit
+        Información
       </title>
     </Head>
     <Box
@@ -32,7 +32,7 @@ const Page = () => (
           container
           spacing={3}
         >
-          <Grid
+          {/* <Grid
             xs={12}
             sm={6}
             lg={3}
@@ -43,8 +43,8 @@ const Page = () => (
               sx={{ height: '100%' }}
               value="$24k"
             />
-          </Grid>
-          <Grid
+          </Grid> */}
+          {/* <Grid
             xs={12}
             sm={6}
             lg={3}
@@ -55,8 +55,8 @@ const Page = () => (
               sx={{ height: '100%' }}
               value="1.6k"
             />
-          </Grid>
-          <Grid
+          </Grid> */}
+          {/* <Grid
             xs={12}
             sm={6}
             lg={3}
@@ -75,12 +75,26 @@ const Page = () => (
               sx={{ height: '100%' }}
               value="$15k"
             />
-          </Grid>
+          </Grid> */}
           <Grid
             xs={12}
             lg={8}
           >
-            <OverviewSales
+             <strong>Obligaciones de las eps con las mujeres embarazadas en colombia</strong>
+
+             <p>Las Entidades Promotoras de Salud (EPS) tienen la responsabilidad de brindar atención integral a las mujeres embarazadas, garantizando su bienestar y el de sus hijos. Algunas de las obligaciones específicas de las EPS con respecto a las mujeres embarazadas en Colombia incluyen:
+                        
+            Control prenatal: Las EPS deben proporcionar servicios de control prenatal para asegurar un seguimiento adecuado durante el embarazo. Esto incluye consultas médicas regulares, exámenes de laboratorio y estudios de diagnóstico por imágenes según sea necesario.
+
+            Atención durante el parto: Las EPS deben garantizar el acceso a servicios de atención obstétrica de calidad durante el parto. Esto implica la disponibilidad de personal médico calificado y la infraestructura necesaria para atender partos seguros.
+
+            Acceso a medicamentos e insumos: Las mujeres embarazadas deben tener acceso a los medicamentos e insumos necesarios para su salud y la del feto. Esto incluye la disponibilidad de suplementos vitamínicos, medicamentos específicos recomendados durante el embarazo y otros productos relacionados.
+
+            Atención postparto: Después del parto, las EPS deben brindar atención postparto que incluya seguimiento médico tanto para la madre como para el recién nacido. Esto puede incluir asesoramiento sobre la lactancia materna, cuidado del recién nacido y evaluación de la salud de la madre.
+
+            Educación en salud: Las EPS tienen la responsabilidad de proporcionar educación en salud a las mujeres embarazadas, brindándoles información sobre la importancia del control prenatal, la nutrición adecuada durante el embarazo, la preparación para el parto y otros temas relacionados.
+            </p>
+            {/* <OverviewSales
               chartSeries={[
                 {
                   name: 'This year',
@@ -92,18 +106,23 @@ const Page = () => (
                 }
               ]}
               sx={{ height: '100%' }}
-            />
+            /> */}
           </Grid>
           <Grid
             xs={12}
             md={6}
             lg={4}
           >
-            <OverviewTraffic
+          <img
+              alt=""
+              src="/assets/emba3.jpg"
+              height="500px" // Puedes ajustar el valor según tus necesidades
+            />
+            {/* <OverviewTraffic
               chartSeries={[63, 15, 22]}
               labels={['Desktop', 'Tablet', 'Phone']}
               sx={{ height: '100%' }}
-            />
+            /> */}
           </Grid>
           <Grid
             xs={12}

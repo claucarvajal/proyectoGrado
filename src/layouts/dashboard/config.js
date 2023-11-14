@@ -7,14 +7,15 @@ import UserPlusIcon from '@heroicons/react/24/solid/UserPlusIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
 import { SvgIcon } from '@mui/material';
+import { BeakerIcon } from '@heroicons/react/24/solid'
 
 export const items = [
   {
-    title: 'Overview',
+    title: 'Informativo',
     path: '/',
     icon: (
       <SvgIcon fontSize="small">
-        <ChartBarIcon />
+        <BeakerIcon />
       </SvgIcon>
     )
   },

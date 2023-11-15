@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const data = {
     personas: [     
       {
-        tipoDoc: "CC",
+        tipodoc: "CC",
         documento: "123456789",
         nombres: "Juana Pérez",
         fechaNacimiento: "1990-05-15",
@@ -22,19 +22,19 @@ export default async function handler(req, res) {
         riesgo: "SI",
         controlEmbarazo: [
             {
-                fechaVisita: "",
+                fechavisita: "",
                 descripcion: "",
                 tipoControl: "inicial",
                 cumplio: "NO"
             },
             {
-                fechaVisita: "",
+                fechavisita: "",
                 descripcion: "",
                 tipoControl: "medio",
                 cumplio: "NO"
             },
             {
-                fechaVisita: "",
+                fechavisita: "",
                 descripcion: "",
                 tipoControl: "final",
                 cumplio: "NO"
@@ -42,7 +42,7 @@ export default async function handler(req, res) {
         ],
         hijos: [
             {
-                tipoDoc: "TI",
+                tipodoc: "TI",
                 documento: "987654321",
                 nombres: "Sofía Pérez",
                 fechaNacimiento: "2019-08-20",
@@ -55,23 +55,23 @@ export default async function handler(req, res) {
                     {
                         nombre: "001",
                         descripcion: "Tuberculosis B.C.G",
-                        fechaVacunacion: "2019-08-22"
+                        fechavacunacion: "2019-08-22"
                     },
                     {
                         nombre: "002",
                         descripcion: "Hepatitis B",
-                        fechaVacunacion: "2019-08-22"
+                        fechavacunacion: "2019-08-22"
                     },
                     {
                         nombre: "004",
                         descripcion: "Polio (oral-IM)",
-                        fechaVacunacion: "2019-10-22"
+                        fechavacunacion: "2019-10-22"
                     }
 
                 ]
             },
             {
-                tipoDoc: "RC",
+                tipodoc: "RC",
                 documento: "456789012",
                 nombres: "Camila Pérez",
                 fechaNacimiento: "2021-03-10",
@@ -85,24 +85,24 @@ export default async function handler(req, res) {
                     {
                         nombre: "001",
                         descripcion: "Tuberculosis B.C.G",
-                        fechaVacunacion: "2021-08-15"
+                        fechavacunacion: "2021-08-15"
                     },
                     {
                         nombre: "002",
                         descripcion: "Hepatitis B",
-                        fechaVacunacion: "2021-08-15"
+                        fechavacunacion: "2021-08-15"
                     },
                     {
                         nombre: "004",
                         descripcion: "Polio (oral-IM)",
-                        fechaVacunacion: "2021-10-15"
+                        fechavacunacion: "2021-10-15"
                     }
                 ]
             }
         ]
     },
     {
-        tipoDoc: "CC",
+        tipodoc: "CC",
         documento: "987654321",
         nombres: "María Gómez",
         fechaNacimiento: "1995-08-22",
@@ -114,19 +114,19 @@ export default async function handler(req, res) {
         riesgo: "SI",
         controlEmbarazo: [
             {
-                fechaVisita: "2023-07-12",
+                fechavisita: "2023-07-12",
                 descripcion: "",
                 tipoControl: "inicial",
                 cumplio: "SI"
             },
             {
-                fechaVisita: "2023-08-12",
+                fechavisita: "2023-08-12",
                 descripcion: "",
                 tipoControl: "medio",
                 cumplio: "SI"
             },
             {
-                fechaVisita: "2023-11-12",
+                fechavisita: "2023-11-12",
                 descripcion: "",
                 tipoControl: "final",
                 cumplio: "SI"
@@ -134,7 +134,7 @@ export default async function handler(req, res) {
         ],
         hijos: [
             {
-                tipoDoc: "TI",
+                tipodoc: "TI",
                 documento: "111223344",
                 nombres: "Isabella Gómez",
                 fechaNacimiento: "2019-12-10",
@@ -147,17 +147,17 @@ export default async function handler(req, res) {
                     {
                         nombre: "001",
                         descripcion: "Hepatitis A",
-                        fechaVacunacion: "2019-12-15"
+                        fechavacunacion: "2019-12-15"
                     },
                     {
                         nombre: "002",
                         descripcion: "Varicela",
-                        fechaVacunacion: "2019-12-15"
+                        fechavacunacion: "2019-12-15"
                     },
                     {
                         nombre: "004",
                         descripcion: "Sarampión, Paperas, Rubéola",
-                        fechaVacunacion: "2020-01-15"
+                        fechavacunacion: "2020-01-15"
                     }
                 ]
             }
@@ -165,7 +165,7 @@ export default async function handler(req, res) {
         ]
     },
     {
-        tipoDoc: "CC",
+        tipodoc: "CC",
         documento: "987654321",
         nombres: "sara orduz",
         fechaNacimiento: "1996-09-15",
@@ -177,19 +177,19 @@ export default async function handler(req, res) {
         riesgo: "NO",
         controlEmbarazo: [
             {
-                fechaVisita: "2023-09-12",
+                fechavisita: "2023-09-12",
                 descripcion: "",
                 tipoControl: "inicial",
                 cumplio: "SI"
             },
             {
-                fechaVisita: "",
+                fechavisita: "",
                 descripcion: "",
                 tipoControl: "medio",
                 cumplio: "NO"
             },
             {
-                fechaVisita: "",
+                fechavisita: "",
                 descripcion: "",
                 tipoControl: "final",
                 cumplio: "NO"
@@ -202,47 +202,102 @@ export default async function handler(req, res) {
 
 
   for (const persona of personas) {
-    // Insertar o actualizar en la tabla 'personasintermedia'
+    // Extract only the desired properties for 'personasintermedia'
+    const personaData = {
+      tipodoc: persona.tipodoc,
+      documento: persona.documento,
+      nombres: persona.nombres,
+      // Add other properties as needed
+    };
+  
+    // Insert or update in the 'personasintermedia' table
     let { error } = await supabaseIntermedia
       .from("personasintermedia")
-      .upsert([persona], { returning: "minimal" });
-
+      .upsert([personaData], { returning: "minimal" });
+  
+    console.log(error, "que viene??");
     if (error) {
       console.error("Error insertando o actualizando persona:", error);
       // manejar error
     }
-
-    // Insertar o actualizar en la tabla 'controlembarazointermedia'
-    for (const control of persona.controlEmbarazo) {
-      control.documento = persona.documento; // Asegúrate de que 'documento' es la clave correcta
+  
+    // ... (similar modification for other tables)
+  
+    for (const control of persona.controlembarazo) {
+      // Extract only the desired properties for 'controlembarazointermedia'
+      const controlData = {
+        documento: persona.documento,
+        fechavisita: control.fechavisita,
+        // Add other properties as needed
+      };
+  
+      // Insert or update in the 'controlembarazointermedia' table
       let { error } = await supabaseIntermedia
         .from("controlembarazointermedia")
-        .upsert([control], { returning: "minimal" });
-
+        .upsert([controlData], { returning: "minimal" });
+  
       if (error) {
         console.error("Error insertando o actualizando controlEmbarazo:", error);
         // manejar error
       }
     }
-
-    // Insertar o actualizar en la tabla 'hijosintermedia' y 'hijosvacunasintermedia'
+  
+    // ... (similar modification for other tables)
+  
     for (const hijo of persona.hijos) {
-      hijo.documentoPadre = persona.documento; // Asegúrate de que 'documentoPadre' es la clave correcta
+      // Extract only the desired properties for 'hijosintermedia'
+      const hijoData = {
+        responsable: persona.documento,
+        documento: hijo.documento,
+        nombres: hijo.nombres,
+        // Add other properties as needed
+      };
+  
+      // Insert or update in the 'hijosintermedia' table
       let { error } = await supabaseIntermedia
         .from("hijosintermedia")
-        .upsert([hijo], { returning: "minimal" });
-
+        .upsert([hijoData], { returning: "minimal" });
+  
       if (error) {
         console.error("Error insertando o actualizando hijo:", error);
         // manejar error
       }
+      
+      const personaData2 = {
+        tipodoc: hijo.tipodoc,
+        documento: hijo.documento,
+        nombres: hijo.nombres,
+        // Add other properties as needed
+      };
+    
+      // Insert or update in the 'personasintermedia' table
+      let { error2 } = await supabaseIntermedia
+        .from("personasintermedia")
+        .upsert([personaData2], { returning: "minimal" });
+    
+      console.log(error2, "que viene??");
+      if (error2) {
+        console.error("Error insertando o actualizando persona:", error2);
+        // manejar error
+      }
 
+      // ... (similar modification for other tables)
+  
       for (const vacuna of hijo.hijosvacunas) {
-        vacuna.documentoHijo = hijo.documento; // Asegúrate de que 'documentoHijo' es la clave correcta
+        // Extract only the desired properties for 'hijosvacunasintermedia'
+        const vacunaData = {
+          documento: hijo.documento,
+          nombre: vacuna.nombre,
+          descripcion: vacuna.descripcion,
+          fechavacunacion: vacuna.fechavacunacion,
+          // Add other properties as needed
+        };
+  
+        // Insert or update in the 'hijosvacunasintermedia' table
         let { error } = await supabaseIntermedia
-          .from("hijosvacunasintermedia")
-          .upsert([vacuna], { returning: "minimal" });
-
+          .from("vacunacionintermedia")
+          .upsert([vacunaData], { returning: "minimal" });
+  
         if (error) {
           console.error("Error insertando o actualizando hijosvacunas:", error);
           // manejar error
@@ -250,7 +305,7 @@ export default async function handler(req, res) {
       }
     }
   }
-
+  
   // Devuelve el usuario insertado
   res.status(201).json(personas);
 }

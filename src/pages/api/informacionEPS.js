@@ -8,192 +8,203 @@ export default async function handler(req, res) {
   const { personas } = req.body;
 
   const data = {
-    personas: [
+    personas: [     
       {
         tipoDoc: "CC",
         documento: "123456789",
         nombres: "Juana Pérez",
         fechaNacimiento: "1990-05-15",
+        fechaEmbarazo: "2023-05-12",
         departamento: "Cundinamarca",
         municipio: "Bogotá",
         email: "juana.perez@example.com",
         embarazo: "SI",
         riesgo: "SI",
         controlEmbarazo: [
-          {
-            fechaVisita: "",
-            descripcion: "",
-            tipoControl: "inicial",
-            cumplio: "NO",
-          },
-          {
-            fechaVisita: "",
-            descripcion: "",
-            tipoControl: "medio",
-            cumplio: "NO",
-          },
-          {
-            fechaVisita: "",
-            descripcion: "",
-            tipoControl: "final",
-            cumplio: "NO",
-          },
+            {
+                fechaVisita: "",
+                descripcion: "",
+                tipoControl: "inicial",
+                cumplio: "NO"
+            },
+            {
+                fechaVisita: "",
+                descripcion: "",
+                tipoControl: "medio",
+                cumplio: "NO"
+            },
+            {
+                fechaVisita: "",
+                descripcion: "",
+                tipoControl: "final",
+                cumplio: "NO"
+            }
         ],
         hijos: [
-          {
-            tipoDoc: "TI",
-            documento: "987654321",
-            nombres: "Sofía Pérez",
-            fechaNacimiento: "2015-08-20",
-            departamento: "Cundinamarca",
-            municipio: "Bogotá",
-            email: "sofia.perez@example.com",
-            embarazo: 0,
-            riesgo: 0,
-            hijosvacunas: [
-              {
-                nombre: "BCG",
-                descripcion: "Tuberculosis",
-                fechaVacunacion: "2015-09-01",
-              },
-              {
-                nombre: "DTP",
-                descripcion: "Difteria, Tétanos, Tos ferina",
-                fechaVacunacion: "2015-10-15",
-              },
-              {
-                nombre: "HepB",
-                descripcion: "Hepatitis B",
-                fechaVacunacion: "2015-11-30",
-              },
-            ],
-          },
-          {
-            tipoDoc: "RC",
-            documento: "456789012",
-            nombres: "Camila Pérez",
-            fechaNacimiento: "2018-03-10",
-            departamento: "Cundinamarca",
-            municipio: "Bogotá",
-            email: "camila.perez@example.com",
-            embarazo: 0,
-            riesgo: 0,
-            hijosvacunas: [
-              {
-                nombre: "Rotavirus",
-                descripcion: "Prevención de gastroenteritis",
-                fechaVacunacion: "2018-04-01",
-              },
-              {
-                nombre: "Neumococo",
-                descripcion: "Neumonía y meningitis",
-                fechaVacunacion: "2018-05-15",
-              },
-              {
-                nombre: "Polio",
-                descripcion: "Poliomielitis",
-                fechaVacunacion: "2018-06-30",
-              },
-            ],
-          },
-        ],
-      },
-      {
+            {
+                tipoDoc: "TI",
+                documento: "987654321",
+                nombres: "Sofía Pérez",
+                fechaNacimiento: "2019-08-20",
+                departamento: "Cundinamarca",
+                municipio: "Bogotá",
+                email: "juana.perez@example.com",
+                embarazo: 0,
+                riesgo: 0,
+                hijosvacunas: [
+                    {
+                        nombre: "001",
+                        descripcion: "Tuberculosis B.C.G",
+                        fechaVacunacion: "2019-08-22"
+                    },
+                    {
+                        nombre: "002",
+                        descripcion: "Hepatitis B",
+                        fechaVacunacion: "2019-08-22"
+                    },
+                    {
+                        nombre: "004",
+                        descripcion: "Polio (oral-IM)",
+                        fechaVacunacion: "2019-10-22"
+                    }
+
+                ]
+            },
+            {
+                tipoDoc: "RC",
+                documento: "456789012",
+                nombres: "Camila Pérez",
+                fechaNacimiento: "2021-03-10",
+                fechaEmbarazo: "",
+                departamento: "Cundinamarca",
+                municipio: "Bogotá",
+                email: "juana.perez@example.com",
+                embarazo: 0,
+                riesgo: 0,
+                hijosvacunas: [
+                    {
+                        nombre: "001",
+                        descripcion: "Tuberculosis B.C.G",
+                        fechaVacunacion: "2021-08-15"
+                    },
+                    {
+                        nombre: "002",
+                        descripcion: "Hepatitis B",
+                        fechaVacunacion: "2021-08-15"
+                    },
+                    {
+                        nombre: "004",
+                        descripcion: "Polio (oral-IM)",
+                        fechaVacunacion: "2021-10-15"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         tipoDoc: "CC",
         documento: "987654321",
         nombres: "María Gómez",
         fechaNacimiento: "1995-08-22",
+        fechaEmbarazo: "2023-04-12",
         departamento: "Antioquia",
         municipio: "Medellín",
         email: "maria.gomez@example.com",
         embarazo: "SI",
         riesgo: "SI",
         controlEmbarazo: [
-          {
-            fechaVisita: "",
-            descripcion: "",
-            tipoControl: "inicial",
-            cumplio: "NO",
-          },
-          {
-            fechaVisita: "",
-            descripcion: "",
-            tipoControl: "medio",
-            cumplio: "NO",
-          },
-          {
-            fechaVisita: "",
-            descripcion: "",
-            tipoControl: "final",
-            cumplio: "NO",
-          },
+            {
+                fechaVisita: "2023-07-12",
+                descripcion: "",
+                tipoControl: "inicial",
+                cumplio: "SI"
+            },
+            {
+                fechaVisita: "2023-08-12",
+                descripcion: "",
+                tipoControl: "medio",
+                cumplio: "SI"
+            },
+            {
+                fechaVisita: "2023-11-12",
+                descripcion: "",
+                tipoControl: "final",
+                cumplio: "SI"
+            }
         ],
         hijos: [
-          {
-            tipoDoc: "TI",
-            documento: "111223344",
-            nombres: "Isabella Gómez",
-            fechaNacimiento: "2017-12-10",
-            departamento: "Antioquia",
-            municipio: "Medellín",
-            email: "isabella.gomez@example.com",
-            embarazo: 0,
-            riesgo: 0,
-            hijosvacunas: [
-              {
-                nombre: "HepA",
-                descripcion: "Hepatitis A",
-                fechaVacunacion: "2018-01-01",
-              },
-              {
-                nombre: "Varicela",
-                descripcion: "Varicela",
-                fechaVacunacion: "2018-02-15",
-              },
-              {
-                nombre: "MMR",
-                descripcion: "Sarampión, Paperas, Rubéola",
-                fechaVacunacion: "2018-03-31",
-              },
-            ],
-          },
-          {
-            tipoDoc: "CC",
-            documento: "555666777",
-            nombres: "Valentina Gómez",
-            fechaNacimiento: "2019-06-25",
-            departamento: "Antioquia",
-            municipio: "Medellín",
-            email: "valentina.gomez@example.com",
-            embarazo: 0,
-            riesgo: 0,
-            hijosvacunas: [
-              {
-                nombre: "Rotavirus",
-                descripcion: "Prevención de gastroenteritis",
-                fechaVacunacion: "2019-07-01",
-              },
-              {
-                nombre: "Neumococo",
-                descripcion: "Neumonía y meningitis",
-                fechaVacunacion: "2019-08-15",
-              },
-              {
-                nombre: "Polio",
-                descripcion: "Poliomielitis",
-                fechaVacunacion: "2019-09-30",
-              },
-            ],
-          },
+            {
+                tipoDoc: "TI",
+                documento: "111223344",
+                nombres: "Isabella Gómez",
+                fechaNacimiento: "2019-12-10",
+                departamento: "Antioquia",
+                municipio: "Medellín",
+                email: "isabella.gomez@example.com",
+                embarazo: 0,
+                riesgo: 0,
+                hijosvacunas: [
+                    {
+                        nombre: "001",
+                        descripcion: "Hepatitis A",
+                        fechaVacunacion: "2019-12-15"
+                    },
+                    {
+                        nombre: "002",
+                        descripcion: "Varicela",
+                        fechaVacunacion: "2019-12-15"
+                    },
+                    {
+                        nombre: "004",
+                        descripcion: "Sarampión, Paperas, Rubéola",
+                        fechaVacunacion: "2020-01-15"
+                    }
+                ]
+            }
+           
+        ]
+    },
+    {
+        tipoDoc: "CC",
+        documento: "987654321",
+        nombres: "sara orduz",
+        fechaNacimiento: "1996-09-15",
+        fechaEmbarazo: "2023-06-12",
+        departamento: "Antioquia",
+        municipio: "Medellín",
+        email: "sara.orduz@example.com",
+        embarazo: "SI",
+        riesgo: "NO",
+        controlEmbarazo: [
+            {
+                fechaVisita: "2023-09-12",
+                descripcion: "",
+                tipoControl: "inicial",
+                cumplio: "SI"
+            },
+            {
+                fechaVisita: "",
+                descripcion: "",
+                tipoControl: "medio",
+                cumplio: "NO"
+            },
+            {
+                fechaVisita: "",
+                descripcion: "",
+                tipoControl: "final",
+                cumplio: "NO"
+            }
         ],
-      },
+        hijos: []
+    }
     ],
   };
 
+
   for (const persona of personas) {
-    // Insertar o actualizar en la tabla 'personas'
+    // Insertar o actualizar en la tabla 'personasintermedia'
     let { error } = await supabaseIntermedia
-      .from("personas")
+      .from("personasintermedia")
       .upsert([persona], { returning: "minimal" });
 
     if (error) {
@@ -201,11 +212,11 @@ export default async function handler(req, res) {
       // manejar error
     }
 
-    // Insertar o actualizar en la tabla 'controlEmbarazo'
+    // Insertar o actualizar en la tabla 'controlembarazointermedia'
     for (const control of persona.controlEmbarazo) {
       control.documento = persona.documento; // Asegúrate de que 'documento' es la clave correcta
       let { error } = await supabaseIntermedia
-        .from("controlEmbarazo")
+        .from("controlembarazointermedia")
         .upsert([control], { returning: "minimal" });
 
       if (error) {
@@ -214,11 +225,11 @@ export default async function handler(req, res) {
       }
     }
 
-    // Insertar o actualizar en la tabla 'hijos' y 'hijosvacunas'
+    // Insertar o actualizar en la tabla 'hijosintermedia' y 'hijosvacunasintermedia'
     for (const hijo of persona.hijos) {
       hijo.documentoPadre = persona.documento; // Asegúrate de que 'documentoPadre' es la clave correcta
       let { error } = await supabaseIntermedia
-        .from("hijos")
+        .from("hijosintermedia")
         .upsert([hijo], { returning: "minimal" });
 
       if (error) {
@@ -229,7 +240,7 @@ export default async function handler(req, res) {
       for (const vacuna of hijo.hijosvacunas) {
         vacuna.documentoHijo = hijo.documento; // Asegúrate de que 'documentoHijo' es la clave correcta
         let { error } = await supabaseIntermedia
-          .from("hijosvacunas")
+          .from("hijosvacunasintermedia")
           .upsert([vacuna], { returning: "minimal" });
 
         if (error) {

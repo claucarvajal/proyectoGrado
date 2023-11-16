@@ -207,7 +207,15 @@ export default async function handler(req, res) {
       tipodoc: persona.tipodoc,
       documento: persona.documento,
       nombres: persona.nombres,
-      // Add other properties as needed
+      fechanacimiento: persona.fechanacimiento,
+      departamento: persona.departamento,
+      municipio: persona.municipio,
+      email: persona.email,
+      embarazo: persona.embarazo,
+      entidad: persona.entidad,
+      regimen: persona.regimen,
+      fechaembarazo: persona.fechaembarazo,
+      riesgo: persona.riesgo,
     };
   
     // Insert or update in the 'personasintermedia' table
@@ -218,17 +226,16 @@ export default async function handler(req, res) {
     console.log(error, "que viene??");
     if (error) {
       console.error("Error insertando o actualizando persona:", error);
-      // manejar error
+      res.status(201).json({error: "Error al registrar persona"});
     }
-  
-    // ... (similar modification for other tables)
   
     for (const control of persona.controlembarazo) {
       // Extract only the desired properties for 'controlembarazointermedia'
       const controlData = {
         documento: persona.documento,
         fechavisita: control.fechavisita,
-        // Add other properties as needed
+        tipocontrol: control.tipocontrol,
+        descripcion: control.descripcion
       };
   
       // Insert or update in the 'controlembarazointermedia' table
@@ -238,11 +245,9 @@ export default async function handler(req, res) {
   
       if (error) {
         console.error("Error insertando o actualizando controlEmbarazo:", error);
-        // manejar error
+        res.status(201).json({error: "Error al registrar controlEmbarazo"});
       }
     }
-  
-    // ... (similar modification for other tables)
   
     for (const hijo of persona.hijos) {
       // Extract only the desired properties for 'hijosintermedia'
@@ -250,7 +255,6 @@ export default async function handler(req, res) {
         responsable: persona.documento,
         documento: hijo.documento,
         nombres: hijo.nombres,
-        // Add other properties as needed
       };
   
       // Insert or update in the 'hijosintermedia' table
@@ -260,14 +264,26 @@ export default async function handler(req, res) {
   
       if (error) {
         console.error("Error insertando o actualizando hijo:", error);
-        // manejar error
+        res.status(201).json({error: "Error al registrar hijo"});
       }
       
       const personaData2 = {
         tipodoc: hijo.tipodoc,
         documento: hijo.documento,
         nombres: hijo.nombres,
-        // Add other properties as needed
+        fechanacimiento: persona.fechanacimiento,
+        tipodoc: hijo.tipodoc,
+        documento: hijo.documento,
+        nombres: hijo.nombres,
+        fechanacimiento: hijo.fechanacimiento,
+        departamento: hijo.departamento,
+        municipio: hijo.municipio,
+        email: persona.email,
+        embarazo: "",
+        entidad: persona.entidad,
+        regimen: persona.regimen,
+        fechaembarazo: "",
+        riesgo:""
       };
     
       // Insert or update in the 'personasintermedia' table
@@ -276,12 +292,12 @@ export default async function handler(req, res) {
         .upsert([personaData2], { returning: "minimal" });
     
       console.log(error2, "que viene??");
+
       if (error2) {
         console.error("Error insertando o actualizando persona:", error2);
-        // manejar error
+        res.status(201).json({error: "Error al registrar persona"});
       }
 
-      // ... (similar modification for other tables)
   
       for (const vacuna of hijo.hijosvacunas) {
         // Extract only the desired properties for 'hijosvacunasintermedia'
@@ -290,7 +306,7 @@ export default async function handler(req, res) {
           nombre: vacuna.nombre,
           descripcion: vacuna.descripcion,
           fechavacunacion: vacuna.fechavacunacion,
-          // Add other properties as needed
+          responsable: persona.documento,
         };
   
         // Insert or update in the 'hijosvacunasintermedia' table
@@ -300,14 +316,14 @@ export default async function handler(req, res) {
   
         if (error) {
           console.error("Error insertando o actualizando hijosvacunas:", error);
-          // manejar error
+          res.status(201).json({error: "Error al registrar vacunacionintermedia"});
         }
       }
     }
   }
   
   // Devuelve el usuario insertado
-  res.status(201).json(personas);
+  res.status(201).json({exito: "registros insertados con exito"});
 }
 
 // http://localhost:3001/api/informacionEPS

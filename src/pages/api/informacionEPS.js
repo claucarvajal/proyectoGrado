@@ -1,204 +1,23 @@
 import { supabaseIntermedia } from "src/supabase/clienteIntermedia";
 
+// Restricción única para 'personasintermedia' basada en 'documento'
+const personaUniqueConstraint = ["documento"];
+
+// Restricción única para 'controlembarazointermedia' basada en 'documento' y 'tipocontrol'
+const controlUniqueConstraint = ["documento", "tipocontrol"];
+
+// Restricción única para 'hijosintermedia' basada en 'documento'
+const hijoUniqueConstraint = ["documento"];
+
+// Restricción única para 'vacunacionintermedia' basada en 'documento' y 'nombre'
+const vacunaUniqueConstraint = ["documento", "nombre"];
+
 export default async function handler(req, res) {
   // Inserta el usuario en la base de datos
   // const user = await insertUser(req.body);
 
   // const json = req.body;
   const { personas } = req.body;
-
-  const data = {
-    personas: [     
-      {
-        tipodoc: "CC",
-        documento: "123456789",
-        nombres: "Juana Pérez",
-        fechaNacimiento: "1990-05-15",
-        fechaEmbarazo: "2023-05-12",
-        departamento: "Cundinamarca",
-        municipio: "Bogotá",
-        email: "juana.perez@example.com",
-        embarazo: "SI",
-        riesgo: "SI",
-        controlEmbarazo: [
-            {
-                fechavisita: "",
-                descripcion: "",
-                tipoControl: "inicial",
-                cumplio: "NO"
-            },
-            {
-                fechavisita: "",
-                descripcion: "",
-                tipoControl: "medio",
-                cumplio: "NO"
-            },
-            {
-                fechavisita: "",
-                descripcion: "",
-                tipoControl: "final",
-                cumplio: "NO"
-            }
-        ],
-        hijos: [
-            {
-                tipodoc: "TI",
-                documento: "987654321",
-                nombres: "Sofía Pérez",
-                fechaNacimiento: "2019-08-20",
-                departamento: "Cundinamarca",
-                municipio: "Bogotá",
-                email: "juana.perez@example.com",
-                embarazo: 0,
-                riesgo: 0,
-                hijosvacunas: [
-                    {
-                        nombre: "001",
-                        descripcion: "Tuberculosis B.C.G",
-                        fechavacunacion: "2019-08-22"
-                    },
-                    {
-                        nombre: "002",
-                        descripcion: "Hepatitis B",
-                        fechavacunacion: "2019-08-22"
-                    },
-                    {
-                        nombre: "004",
-                        descripcion: "Polio (oral-IM)",
-                        fechavacunacion: "2019-10-22"
-                    }
-
-                ]
-            },
-            {
-                tipodoc: "RC",
-                documento: "456789012",
-                nombres: "Camila Pérez",
-                fechaNacimiento: "2021-03-10",
-                fechaEmbarazo: "",
-                departamento: "Cundinamarca",
-                municipio: "Bogotá",
-                email: "juana.perez@example.com",
-                embarazo: 0,
-                riesgo: 0,
-                hijosvacunas: [
-                    {
-                        nombre: "001",
-                        descripcion: "Tuberculosis B.C.G",
-                        fechavacunacion: "2021-08-15"
-                    },
-                    {
-                        nombre: "002",
-                        descripcion: "Hepatitis B",
-                        fechavacunacion: "2021-08-15"
-                    },
-                    {
-                        nombre: "004",
-                        descripcion: "Polio (oral-IM)",
-                        fechavacunacion: "2021-10-15"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        tipodoc: "CC",
-        documento: "987654321",
-        nombres: "María Gómez",
-        fechaNacimiento: "1995-08-22",
-        fechaEmbarazo: "2023-04-12",
-        departamento: "Antioquia",
-        municipio: "Medellín",
-        email: "maria.gomez@example.com",
-        embarazo: "SI",
-        riesgo: "SI",
-        controlEmbarazo: [
-            {
-                fechavisita: "2023-07-12",
-                descripcion: "",
-                tipoControl: "inicial",
-                cumplio: "SI"
-            },
-            {
-                fechavisita: "2023-08-12",
-                descripcion: "",
-                tipoControl: "medio",
-                cumplio: "SI"
-            },
-            {
-                fechavisita: "2023-11-12",
-                descripcion: "",
-                tipoControl: "final",
-                cumplio: "SI"
-            }
-        ],
-        hijos: [
-            {
-                tipodoc: "TI",
-                documento: "111223344",
-                nombres: "Isabella Gómez",
-                fechaNacimiento: "2019-12-10",
-                departamento: "Antioquia",
-                municipio: "Medellín",
-                email: "isabella.gomez@example.com",
-                embarazo: 0,
-                riesgo: 0,
-                hijosvacunas: [
-                    {
-                        nombre: "001",
-                        descripcion: "Hepatitis A",
-                        fechavacunacion: "2019-12-15"
-                    },
-                    {
-                        nombre: "002",
-                        descripcion: "Varicela",
-                        fechavacunacion: "2019-12-15"
-                    },
-                    {
-                        nombre: "004",
-                        descripcion: "Sarampión, Paperas, Rubéola",
-                        fechavacunacion: "2020-01-15"
-                    }
-                ]
-            }
-           
-        ]
-    },
-    {
-        tipodoc: "CC",
-        documento: "987654321",
-        nombres: "sara orduz",
-        fechaNacimiento: "1996-09-15",
-        fechaEmbarazo: "2023-06-12",
-        departamento: "Antioquia",
-        municipio: "Medellín",
-        email: "sara.orduz@example.com",
-        embarazo: "SI",
-        riesgo: "NO",
-        controlEmbarazo: [
-            {
-                fechavisita: "2023-09-12",
-                descripcion: "",
-                tipoControl: "inicial",
-                cumplio: "SI"
-            },
-            {
-                fechavisita: "",
-                descripcion: "",
-                tipoControl: "medio",
-                cumplio: "NO"
-            },
-            {
-                fechavisita: "",
-                descripcion: "",
-                tipoControl: "final",
-                cumplio: "NO"
-            }
-        ],
-        hijos: []
-    }
-    ],
-  };
 
 
   for (const persona of personas) {
@@ -219,13 +38,13 @@ export default async function handler(req, res) {
     };
   
     // Insert or update in the 'personasintermedia' table
-    let { error } = await supabaseIntermedia
+    let { errorPer } = await supabaseIntermedia
       .from("personasintermedia")
-      .upsert([personaData], { returning: "minimal" });
+      .upsert([personaData], { returning: "minimal", onConflict: personaUniqueConstraint  });
   
-    console.log(error, "que viene??");
-    if (error) {
-      console.error("Error insertando o actualizando persona:", error);
+    console.log(errorPer, "que viene??");
+    if (errorPer) {
+      console.error("Error insertando o actualizando persona:", errorPer);
       res.status(201).json({error: "Error al registrar persona"});
     }
   
@@ -239,12 +58,12 @@ export default async function handler(req, res) {
       };
   
       // Insert or update in the 'controlembarazointermedia' table
-      let { error } = await supabaseIntermedia
+      let { errorControl  } = await supabaseIntermedia
         .from("controlembarazointermedia")
-        .upsert([controlData], { returning: "minimal" });
+        .upsert([controlData], { returning: "minimal", onConflict: controlUniqueConstraint });
   
-      if (error) {
-        console.error("Error insertando o actualizando controlEmbarazo:", error);
+      if (errorControl ) {
+        console.error("Error insertando o actualizando controlEmbarazo:", errorControl );
         res.status(201).json({error: "Error al registrar controlEmbarazo"});
       }
     }
@@ -258,12 +77,12 @@ export default async function handler(req, res) {
       };
   
       // Insert or update in the 'hijosintermedia' table
-      let { error } = await supabaseIntermedia
+      let { errorHijo  } = await supabaseIntermedia
         .from("hijosintermedia")
-        .upsert([hijoData], { returning: "minimal" });
+        .upsert([hijoData], { returning: "minimal", onConflict: hijoUniqueConstraint });
   
-      if (error) {
-        console.error("Error insertando o actualizando hijo:", error);
+      if (errorHijo ) {
+        console.error("Error insertando o actualizando hijo:", errorHijo );
         res.status(201).json({error: "Error al registrar hijo"});
       }
       
@@ -287,14 +106,14 @@ export default async function handler(req, res) {
       };
     
       // Insert or update in the 'personasintermedia' table
-      let { error2 } = await supabaseIntermedia
+      let { errorPer2 } = await supabaseIntermedia
         .from("personasintermedia")
-        .upsert([personaData2], { returning: "minimal" });
+        .upsert([personaData2], { returning: "minimal", onConflict: personaUniqueConstraint  });
     
-      console.log(error2, "que viene??");
+      console.log(errorPer2, "que viene??");
 
-      if (error2) {
-        console.error("Error insertando o actualizando persona:", error2);
+      if (errorPer2) {
+        console.error("Error insertando o actualizando persona:", errorPer2);
         res.status(201).json({error: "Error al registrar persona"});
       }
 
@@ -310,12 +129,12 @@ export default async function handler(req, res) {
         };
   
         // Insert or update in the 'hijosvacunasintermedia' table
-        let { error } = await supabaseIntermedia
+        let { errorVacuna  } = await supabaseIntermedia
           .from("vacunacionintermedia")
-          .upsert([vacunaData], { returning: "minimal" });
+          .upsert([vacunaData], { returning: "minimal", onConflict: vacunaUniqueConstraint });
   
-        if (error) {
-          console.error("Error insertando o actualizando hijosvacunas:", error);
+        if (errorVacuna) {
+          console.error("Error insertando o actualizando hijosvacunas:", errorVacuna );
           res.status(201).json({error: "Error al registrar vacunacionintermedia"});
         }
       }
@@ -323,7 +142,7 @@ export default async function handler(req, res) {
   }
   
   // Devuelve el usuario insertado
-  res.status(201).json({exito: "registros insertados con exito"});
+  res.status(200).json({ message: "Operación completada exitosamente" });
 }
 
 // http://localhost:3001/api/informacionEPS

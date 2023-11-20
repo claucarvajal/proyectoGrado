@@ -23,6 +23,8 @@ import { Grid } from "@mui/material";
 import { differenceInYears } from 'date-fns';
 import { differenceInMonths } from 'date-fns';
 import { supabase } from "src/supabase/client";
+// import { supabase } from '@supabase/supabase-js';
+
 
 
 export const PersonaTable = (props) => {
@@ -52,7 +54,7 @@ export const PersonaTable = (props) => {
   const [riesgo, setRiesgo] = useState("");
   const [personaData, setPersonaData] = useState([]);
   
-
+  
   const handleOpenLayer = async (name, fechaNacimiento, fechaEmbarazo, entidad, riesgo, documento) => {
     setNombre(name);
     setFechaNacimiento(fechaNacimiento);
@@ -65,32 +67,54 @@ export const PersonaTable = (props) => {
     const mesesEmbarazo = differenceInMonths(new Date(), new Date(fechaEmbarazo));
     setMeses(mesesEmbarazo);
 
-    const { data, error } = await supabase
-    .from('persona')
-    .select('*', { 
-      leftJoin: { 
-        from: 'evaluacioncontrol', 
-        on: { 'evaluacioncontrol.documento': 'persona.documento' } 
-      } 
-    })
-    .select('*', { 
-      leftJoin: { 
-        from: 'controlembarazo', 
-        on: { 'controlembarazo.tipocontrol': 'evaluacioncontrol.tipocontrol' } 
-      } 
-    })
-    .eq('embarazo', 'SI')
-    .eq('documento', documento)
+  
+    const { data: evaluacioncontrolData, error: evalError } = await supabase
+    .from('evaluacioncontrol')
+    .select('*')
+    .eq('documento', documento);
+  
+  const { data: controlembarazoData, error: controlError } = await supabase
+    .from('controlembarazo')
+    .select('*')
+    .eq('tipocontrol', evaluacioncontrolData.map(item => item.tipocontrol));
+  
+  // Merge data based on tipocontrol
+  const mergedData = evaluacioncontrolData.map(evalItem => {
+    const controlItem = controlembarazoData.find(control => control.tipocontrol === evalItem.tipocontrol);
+    return { ...evalItem, controlembarazo: controlItem };
+  });
+  
+  console.log(mergedData, "¿qué pasó?");
+  
+  if (evalError || controlError) {
+    console.error('Error fetching data:', evalError || controlError);
+  } else {
+    setPersonaData(mergedData);
+  }
+//     const { data, error } = await supabase
+// .from('persona')
+// .select('', {
+// leftJoin: {
+// from: 'evaluacioncontrol',
+// on: { 'evaluacioncontrol.documento': 'persona.documento' }
+// },
+// leftJoin: {
+// from: 'controlembarazo',
+// on: { 'controlembarazo.tipocontrol': 'evaluacioncontrol.tipocontrol' }
+// }
+// })
+// .eq('embarazo', 'SI')
+// .eq('documento', documento);
     // .order('persona.nombres', { ascending: true })
     // .order('evaluacioncontrol.id', { ascending: true });
 
-    console.log(data, "q paso")
-    if (error) {
-      console.error('Error fetching data:', error);
-      // Handle the error appropriately
-    } else {
-      setPersonaData(data);
-    }
+    // console.log(data, "q paso")
+    // if (error) {
+    //   console.error('Error fetching data:', error);
+    //   // Handle the error appropriately
+    // } else {
+    //   setPersonaData(data);
+    // }
 
     // const { data, error2 } = await supabase
     // .from('persona')

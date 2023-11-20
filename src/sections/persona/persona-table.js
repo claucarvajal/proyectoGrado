@@ -75,13 +75,12 @@ export const PersonaTable = (props) => {
   
   const { data: controlembarazoData, error: controlError } = await supabase
     .from('controlembarazo')
-    .select('*')
-    .eq('tipocontrol', evaluacioncontrolData.map(item => item.tipocontrol));
+    .select('*');
   
   // Merge data based on tipocontrol
   const mergedData = evaluacioncontrolData.map(evalItem => {
     const controlItem = controlembarazoData.find(control => control.tipocontrol === evalItem.tipocontrol);
-    return { ...evalItem, controlembarazo: controlItem };
+    return { ...evalItem, ...controlItem };
   });
   
   console.log(mergedData, "¿qué pasó?");
@@ -299,7 +298,8 @@ export const PersonaTable = (props) => {
               <TableRow>
                 <TableCell>Nombre</TableCell>
                 <TableCell>descripción</TableCell>
-                <TableCell></TableCell>
+                <TableCell>Fecha visita</TableCell>
+                <TableCell>check</TableCell>
                 <TableCell>Correo Alerta</TableCell>
                 {/* ... (más encabezados) */}
               </TableRow>
@@ -307,9 +307,9 @@ export const PersonaTable = (props) => {
             <TableBody>
             {personaData.map((item, index) => (
               <TableRow key={index}>
-                <TableCell>{item.id}</TableCell>
+                <TableCell>{item.tipocontrol}</TableCell>
                 <TableCell>{item.descripcion}</TableCell>
-                <TableCell>{/* ... */}</TableCell>
+                <TableCell>{item.fechavisita}</TableCell>
                 <TableCell>{item.correoAlerta}</TableCell>
               </TableRow>
             ))}

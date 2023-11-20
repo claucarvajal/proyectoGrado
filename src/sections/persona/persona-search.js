@@ -19,7 +19,7 @@ export const CustomersSearch = ({ onSearch }) => {
         value={searchValue}
         onChange={handleSearchChange}
         fullWidth
-        placeholder="Buscar cliente"
+        placeholder="Buscar embarazada"
         startAdornment={(
           <InputAdornment position="start">
             <SvgIcon

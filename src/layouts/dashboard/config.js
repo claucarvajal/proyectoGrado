@@ -20,8 +20,8 @@ export const items = [
     )
   },
   {
-    title: 'Listado Clientes',
-    path: '/customers',
+    title: 'Listado de embarazadas',
+    path: '/personaEmbarazadas',
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon />

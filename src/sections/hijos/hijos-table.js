@@ -31,7 +31,7 @@ import { supabase } from "src/supabase/client";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 
-export const PersonaTable = (props) => {
+export const HijosTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -56,81 +56,56 @@ export const PersonaTable = (props) => {
   const [eps, setEPS] = useState("");
   const [meses, setMeses] = useState("");
   const [riesgo, setRiesgo] = useState("");
+  const [nombreRespon, setNombreRespon] = useState("");
+  const [DocuRespon, setDocumentoRespon] = useState("");
   const [personaData, setPersonaData] = useState([]);
 
-  const handleOpenLayer = async (
-    name,
-    fechaNacimiento,
-    fechaEmbarazo,
-    entidad,
-    riesgo,
-    documento
-  ) => {
+  const handleOpenLayer = async (name, fechaNacimiento, fechaEmbarazo, entidad, documento) => {
     setNombre(name);
     setFechaNacimiento(fechaNacimiento);
     setFechaEmbarazo(fechaEmbarazo);
     setEPS(entidad);
-    const fechaNacimiento2 = new Date(fechaNacimiento);
-    const edad3 = differenceInYears(new Date(), fechaNacimiento2);
-    setEdad(edad3);
-    setRiesgo(riesgo);
-    const mesesEmbarazo = differenceInMonths(new Date(), new Date(fechaEmbarazo));
-    setMeses(mesesEmbarazo);
+    const mesesEmbarazo = differenceInMonths(new Date(), new Date(fechaNacimiento));
+    setEdad(mesesEmbarazo);
 
-    const { data: evaluacioncontrolData, error: evalError } = await supabase
-      .from("evaluacioncontrol")
+    const { data: vacunacionData, error: vacunacionError } = await supabase
+      .from("vacunacion")
+      .select("nombre, descripcion, meses");
+
+    const { data: evaluacionvacunacionData, error: evaluacionvacunacionError } = await supabase
+      .from("evaluacionvacunacion")
+      .select("nombre, fechavacunacion")
+      .eq("documento", documento);
+
+    if (vacunacionData && evaluacionvacunacionData) {
+      const mergedData = vacunacionData.map((v) => {
+        const e = evaluacionvacunacionData.find((evaluation) => evaluation.nombre === v.nombre);
+        return { ...v, fechavacunacion: e ? e.fechavacunacion : "NA" };
+      });
+      setPersonaData(mergedData);
+      console.log(mergedData);
+    } else {
+      console.error("Error fetching data:", vacunacionError || evaluacionvacunacionError);
+    }
+
+    // Realiza la consulta para obtener el responsable del menor
+    const { data: dataResponsable, errorResponsable } = await supabase
+      .from("hijos")
       .select("*")
       .eq("documento", documento);
 
-    const { data: controlembarazoData, error: controlError } = await supabase
-      .from("controlembarazo")
-      .select("*");
+    // Extrae el id del responsable del resultado de la consulta
+    const idRespon = dataResponsable[0]?.responsable;
 
-    // Merge data based on tipocontrol
-    const mergedData = evaluacioncontrolData.map((evalItem) => {
-      const controlItem = controlembarazoData.find(
-        (control) => control.tipocontrol === evalItem.tipocontrol
-      );
-      return { ...evalItem, ...controlItem };
-    });
+    // Realiza la consulta para obtener los nombres y documento de la persona
+    const { data: dataPersona, errorPersona } = await supabase
+      .from("persona")
+      .select("nombres, documento")
+      .eq("documento", idRespon);
 
-    console.log(mergedData, "¿qué pasó?");
+    setNombreRespon(dataPersona[0].nombres);
+    setDocumentoRespon(dataPersona[0].documento);
 
-    if (evalError || controlError) {
-      console.error("Error fetching data:", evalError || controlError);
-    } else {
-      setPersonaData(mergedData);
-    }
-    //     const { data, error } = await supabase
-    // .from('persona')
-    // .select('', {
-    // leftJoin: {
-    // from: 'evaluacioncontrol',
-    // on: { 'evaluacioncontrol.documento': 'persona.documento' }
-    // },
-    // leftJoin: {
-    // from: 'controlembarazo',
-    // on: { 'controlembarazo.tipocontrol': 'evaluacioncontrol.tipocontrol' }
-    // }
-    // })
-    // .eq('embarazo', 'SI')
-    // .eq('documento', documento);
-    // .order('persona.nombres', { ascending: true })
-    // .order('evaluacioncontrol.id', { ascending: true });
-
-    // console.log(data, "q paso")
-    // if (error) {
-    //   console.error('Error fetching data:', error);
-    //   // Handle the error appropriately
-    // } else {
-    //   setPersonaData(data);
-    // }
-
-    // const { data, error2 } = await supabase
-    // .from('persona')
-    // .select('*')
-    // .eq('embarazo', 'SI');
-    // console.log(data, "q paso")
     setOpen(true);
   };
 
@@ -167,7 +142,6 @@ export const PersonaTable = (props) => {
                   <TableCell>Municipio</TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell>Entidad</TableCell>
-                  <TableCell>Riesgo</TableCell>
                   <TableCell>Inf</TableCell>
                 </TableRow>
               </TableHead>
@@ -199,7 +173,6 @@ export const PersonaTable = (props) => {
                       <TableCell>{persona.municipio}</TableCell>
                       <TableCell>{persona.email}</TableCell>
                       <TableCell>{persona.entidad}</TableCell>
-                      <TableCell>{persona.riesgo}</TableCell>
                       <TableCell>
                         <IconButton
                           onClick={() =>
@@ -208,7 +181,6 @@ export const PersonaTable = (props) => {
                               persona.fechanacimiento,
                               persona.fechaembarazo,
                               persona.entidad,
-                              persona.riesgo,
                               persona.documento
                             )
                           }
@@ -239,17 +211,17 @@ export const PersonaTable = (props) => {
         <DialogContent>
           <Grid container>
             {/* <Grid item xs={12}></Grid> */}
-            <Grid item xs={1}>
+            <Grid item xs={2}>
               Nombre:
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={4}>
               {name}
             </Grid>
             <Grid item xs={1}>
               Edad:
             </Grid>
             <Grid item xs={5}>
-              {edad}
+              {edad}(meses)
             </Grid>
             <Grid item xs={2}>
               Fecha nacimiento:
@@ -257,48 +229,27 @@ export const PersonaTable = (props) => {
             <Grid item xs={4}>
               {fechaNacimiento}
             </Grid>
-            <Grid item xs={2}>
-              Fecha embarazo:
-            </Grid>
-            <Grid item xs={4}>
-              {fechaEmbarazo}
-            </Grid>
             <Grid item xs={1}>
               EPS:
             </Grid>
             <Grid item xs={5}>
               {eps}
             </Grid>
-            <Grid item xs={1}>
-              Meses:
+            <Grid item xs={12}>
+              Responsable menor: CC: {DocuRespon} {nombreRespon}
             </Grid>
-            <Grid item xs={5}>
-              {meses}
-            </Grid>
-            <Grid item xs={2}>
-              Embarazo alto riego:
-            </Grid>
-            {riesgo === "SI" ? (
-              <Grid item xs={1} style={{ color: "red", fontWeight: "bold" }}>
-                {riesgo}
-              </Grid>
-            ) : (
-              <Grid item xs={1} style={{ color: "green", fontWeight: "bold" }}>
-                {riesgo}
-              </Grid>
-            )}
           </Grid>
 
           <Grid item xs={4} style={{ fontWeight: "bold", marginTop: "20px" }}>
-            Citas de control
+            Control de vacunación
           </Grid>
           <TableContainer component={Paper} style={{ marginTop: "20px" }}>
             <Table>
               <TableHead>
                 <TableRow>
+                  <TableCell>Código</TableCell>
                   <TableCell>Nombre</TableCell>
-                  <TableCell>descripción</TableCell>
-                  <TableCell>FechaVisita</TableCell>
+                  <TableCell>FechaVacuna</TableCell>
                   <TableCell>check</TableCell>
                   <TableCell>Correo Alerta</TableCell>
                 </TableRow>
@@ -306,29 +257,11 @@ export const PersonaTable = (props) => {
               <TableBody>
                 {personaData.map((item, index) => (
                   <TableRow key={index}>
-                    <TableCell>{item.tipocontrol}</TableCell>
+                    <TableCell>{item.nombre}</TableCell>
                     <TableCell>{item.descripcion}</TableCell>
-                    <TableCell>{item.fechavisita}</TableCell>
+                    <TableCell>{item.fechavacunacion}</TableCell>
                     <TableCell>
-                      {index === 0 &&
-                      differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) <
-                        3 ? (
-                        <CheckIcon />
-                      ) : index === 1 &&
-                        differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) >=
-                          3 &&
-                        differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) <
-                          6 ? (
-                        <CheckIcon />
-                      ) : index === 2 &&
-                        differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) >=
-                          7 &&
-                        differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) <
-                          9 ? (
-                        <CheckIcon />
-                      ) : (
-                        <ClearIcon />
-                      )}
+                   
                     </TableCell>
                     <TableCell>{item.correoAlerta}</TableCell>
                   </TableRow>
@@ -345,7 +278,7 @@ export const PersonaTable = (props) => {
   );
 };
 
-PersonaTable.propTypes = {
+HijosTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,

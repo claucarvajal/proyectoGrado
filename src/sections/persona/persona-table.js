@@ -265,9 +265,9 @@ export const PersonaTable = (props) => {
         rowsPerPageOptions={[5, 10, 25]}
       />
     </Card>
-    <Dialog open={open} onClose={handleClose} style={{width:"100%"}}>
+    <Dialog open={open} onClose={handleClose} maxWidth="lg">
       <DialogTitle >Histórico embarazo</DialogTitle>
-      <DialogContent>
+      <DialogContent >
         <Grid container>
           {/* <Grid item xs={12}></Grid> */}
           <Grid item xs={2}>Nombre:</Grid>

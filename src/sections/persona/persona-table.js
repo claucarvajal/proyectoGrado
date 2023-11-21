@@ -91,8 +91,41 @@ export const PersonaTable = (props) => {
       const controlItem = controlembarazoData.find(
         (control) => control.tipocontrol === evalItem.tipocontrol
       );
-      return { ...evalItem, ...controlItem };
+
+      const fechaVisitaCal = evalItem.fechavisita ? new Date(evalItem.fechavisita) : new Date();
+      const monthsDiff = differenceInMonths(fechaVisitaCal, new Date(fechaEmbarazo));
+      console.log("monthsDiff", monthsDiff, fechaEmbarazo, evalItem.fechavisita, evalItem);
+
+      let estado = "";
+      let color = "";
+
+      if (evalItem.tipocontrol == "inicial") {
+        estado = monthsDiff >= 0 && monthsDiff <= 3 ? "En rango" : "Fuera de rango";
+        if (monthsDiff >= 0 && monthsDiff <= 3) {
+          color = evalItem.fechavisita ? "verde" : "naranja";
+        } else {
+          color = evalItem.fechavisita ? "rojo" : "amarillo";
+        }
+      } else if (evalItem.tipocontrol == "medio") {
+        estado = monthsDiff > 3 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
+        if (monthsDiff >= 3 && monthsDiff <= 6) {
+          color = evalItem.fechavisita ? "verde" : "naranja";
+        } else {
+          color = evalItem.fechavisita ? "rojo" : "amarillo";
+        }
+      } else if (evalItem.tipocontrol == "final") {
+        estado = monthsDiff > 6 && monthsDiff <= 9 ? "En rango" : "Fuera de rango";
+        if (monthsDiff > 6 && monthsDiff <= 9) {
+          color = evalItem.fechavisita ? "verde" : "naranja";
+        } else {
+          color = evalItem.fechavisita ? "rojo" : "amarillo";
+        }
+      }
+      return { ...evalItem, ...controlItem, estado, monthsDiff,color };
     });
+
+    // Ordenar mergedData por id del controlembarazo
+    mergedData.sort((a, b) => a.id - b.id);
 
     console.log(mergedData, "¿qué pasó?");
 
@@ -101,36 +134,7 @@ export const PersonaTable = (props) => {
     } else {
       setPersonaData(mergedData);
     }
-    //     const { data, error } = await supabase
-    // .from('persona')
-    // .select('', {
-    // leftJoin: {
-    // from: 'evaluacioncontrol',
-    // on: { 'evaluacioncontrol.documento': 'persona.documento' }
-    // },
-    // leftJoin: {
-    // from: 'controlembarazo',
-    // on: { 'controlembarazo.tipocontrol': 'evaluacioncontrol.tipocontrol' }
-    // }
-    // })
-    // .eq('embarazo', 'SI')
-    // .eq('documento', documento);
-    // .order('persona.nombres', { ascending: true })
-    // .order('evaluacioncontrol.id', { ascending: true });
 
-    // console.log(data, "q paso")
-    // if (error) {
-    //   console.error('Error fetching data:', error);
-    //   // Handle the error appropriately
-    // } else {
-    //   setPersonaData(data);
-    // }
-
-    // const { data, error2 } = await supabase
-    // .from('persona')
-    // .select('*')
-    // .eq('embarazo', 'SI');
-    // console.log(data, "q paso")
     setOpen(true);
   };
 
@@ -330,7 +334,7 @@ export const PersonaTable = (props) => {
                         <ClearIcon />
                       )}
                     </TableCell>
-                    <TableCell>{item.correoAlerta}</TableCell>
+                    <TableCell>{item.estado}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

@@ -207,7 +207,7 @@ export const HijosTable = (props) => {
         />
       </Card>
       <Dialog open={open} onClose={handleClose} maxWidth="lg">
-        <DialogTitle>Histórico embarazo</DialogTitle>
+        <DialogTitle>Histórico control de vacunas</DialogTitle>
         <DialogContent>
           <Grid container>
             {/* <Grid item xs={12}></Grid> */}
@@ -249,6 +249,7 @@ export const HijosTable = (props) => {
                 <TableRow>
                   <TableCell>Código</TableCell>
                   <TableCell>Nombre</TableCell>
+                  <TableCell>Meses</TableCell>
                   <TableCell>FechaVacuna</TableCell>
                   <TableCell>check</TableCell>
                   <TableCell>Correo Alerta</TableCell>
@@ -259,6 +260,7 @@ export const HijosTable = (props) => {
                   <TableRow key={index}>
                     <TableCell>{item.nombre}</TableCell>
                     <TableCell>{item.descripcion}</TableCell>
+                    <TableCell>{item.meses}</TableCell>
                     <TableCell>{item.fechavacunacion}</TableCell>
                     <TableCell>
                    

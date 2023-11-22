@@ -102,26 +102,26 @@ export const PersonaTable = (props) => {
       if (evalItem.tipocontrol == "inicial") {
         estado = monthsDiff >= 0 && monthsDiff <= 3 ? "En rango" : "Fuera de rango";
         if (monthsDiff >= 0 && monthsDiff <= 3) {
-          color = evalItem.fechavisita ? "verde" : "naranja";
+          color = evalItem.fechavisita ? "green" : "orange";
         } else {
-          color = evalItem.fechavisita ? "rojo" : "amarillo";
+          color = evalItem.fechavisita ? "red" : "yellow";
         }
       } else if (evalItem.tipocontrol == "medio") {
-        estado = monthsDiff > 3 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
-        if (monthsDiff >= 3 && monthsDiff <= 6) {
-          color = evalItem.fechavisita ? "verde" : "naranja";
+        estado = monthsDiff > 0 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
+        if (monthsDiff > 0 && monthsDiff <= 6) {
+          color = evalItem.fechavisita ? "green" : "orange";
         } else {
-          color = evalItem.fechavisita ? "rojo" : "amarillo";
+          color = evalItem.fechavisita ? "red" : "yellow";
         }
       } else if (evalItem.tipocontrol == "final") {
-        estado = monthsDiff > 6 && monthsDiff <= 9 ? "En rango" : "Fuera de rango";
-        if (monthsDiff > 6 && monthsDiff <= 9) {
-          color = evalItem.fechavisita ? "verde" : "naranja";
+        estado = monthsDiff > 0 && monthsDiff <= 9 ? "En rango" : "Fuera de rango";
+        if (monthsDiff > 0 && monthsDiff <= 9) {
+          color = evalItem.fechavisita ? "green" : "orange";
         } else {
-          color = evalItem.fechavisita ? "rojo" : "amarillo";
+          color = evalItem.fechavisita ? "red" : "yellow";
         }
       }
-      return { ...evalItem, ...controlItem, estado, monthsDiff,color };
+      return { ...evalItem, ...controlItem, estado, monthsDiff, color };
     });
 
     // Ordenar mergedData por id del controlembarazo
@@ -291,6 +291,23 @@ export const PersonaTable = (props) => {
                 {riesgo}
               </Grid>
             )}
+
+            <Grid item xs={2}>
+              <div style={{ backgroundColor: "green", width: "20px", height: "20px" }}></div>
+              <span>En rango: fecha de control</span>
+            </Grid>
+            <Grid item xs={2}>
+              <div style={{ backgroundColor: "yellow", width: "20px", height: "20px" }}></div>
+              <span>Fuera del rango: No se ha hecho control</span>
+            </Grid>
+            <Grid item xs={2}>
+              <div style={{ backgroundColor: "orange", width: "20px", height: "20px" }}></div>
+              <span>En rango: por favor hacerse el control</span>
+            </Grid>
+            <Grid item xs={2}>
+              <div style={{ backgroundColor: "red", width: "20px", height: "20px" }}></div>
+              <span>Fuera del rango: Fecha de control</span>
+            </Grid>
           </Grid>
 
           <Grid item xs={4} style={{ fontWeight: "bold", marginTop: "20px" }}>
@@ -303,7 +320,7 @@ export const PersonaTable = (props) => {
                   <TableCell>Nombre</TableCell>
                   <TableCell>descripción</TableCell>
                   <TableCell>FechaVisita</TableCell>
-                  <TableCell>check</TableCell>
+                  <TableCell>Estado</TableCell>
                   <TableCell>Correo Alerta</TableCell>
                 </TableRow>
               </TableHead>
@@ -314,27 +331,16 @@ export const PersonaTable = (props) => {
                     <TableCell>{item.descripcion}</TableCell>
                     <TableCell>{item.fechavisita}</TableCell>
                     <TableCell>
-                      {index === 0 &&
-                      differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) <
-                        3 ? (
-                        <CheckIcon />
-                      ) : index === 1 &&
-                        differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) >=
-                          3 &&
-                        differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) <
-                          6 ? (
-                        <CheckIcon />
-                      ) : index === 2 &&
-                        differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) >=
-                          7 &&
-                        differenceInMonths(new Date(fechaEmbarazo), new Date(item.fechavisita)) <
-                          9 ? (
-                        <CheckIcon />
-                      ) : (
-                        <ClearIcon />
-                      )}
+                      <div
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          backgroundColor: item.color,
+                          margin: "0 auto",
+                        }}
+                      ></div>
                     </TableCell>
-                    <TableCell>{item.estado}</TableCell>
+                    <TableCell>{item.estado}</TableCell>{" "}
                   </TableRow>
                 ))}
               </TableBody>

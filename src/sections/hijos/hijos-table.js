@@ -80,8 +80,197 @@ export const HijosTable = (props) => {
     if (vacunacionData && evaluacionvacunacionData) {
       const mergedData = vacunacionData.map((v) => {
         const e = evaluacionvacunacionData.find((evaluation) => evaluation.nombre === v.nombre);
-        return { ...v, fechavacunacion: e ? e.fechavacunacion : "NA" };
+
+        const fechaVacunac = e ? new Date(e.fechavacunacion) : new Date();
+        const monthsDiff = differenceInMonths(fechaVacunac, new Date(fechaNacimiento));
+        console.log("monthsDiff-----", monthsDiff, e);
+
+        let estado = "";
+        let color = "";
+
+        if (v.nombre == "001") {
+          estado = monthsDiff >= 0 && monthsDiff <= 2 ? "En rango" : "Fuera de rango";
+
+          if (monthsDiff >= 0 && monthsDiff <= 2) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "002") {
+          estado = monthsDiff >= 0  && monthsDiff <= 2 ? "En rango" : "Fuera de rango";
+          if (monthsDiff >= 0  && monthsDiff <= 2) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "004") {
+          estado = monthsDiff >= 0  && monthsDiff <= 3 ? "En rango" : "Fuera de rango";
+          if (monthsDiff >= 0  && monthsDiff <= 3) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "005") {
+          estado = monthsDiff >= 0  && monthsDiff <= 3 ? "En rango" : "Fuera de rango";
+          if (monthsDiff >= 0  && monthsDiff <= 3) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+          // Agregar lógica para el nombre 005
+          // Puedes seguir el mismo patrón de condiciones y asignaciones de estado y color
+        } else if (v.nombre == "006") {
+          estado = monthsDiff >= 0  && monthsDiff <= 3 ? "En rango" : "Fuera de rango";
+          if (monthsDiff >= 0  && monthsDiff <= 3) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+          // Agregar lógica para el nombre 006
+          // Puedes seguir el mismo patrón de condiciones y asignaciones de estado y color
+        } else if (v.nombre == "007") {
+          estado = monthsDiff > 0 && monthsDiff <= 3 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 3) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+          // Agregar lógica para el nombre 007
+          // Puedes seguir el mismo patrón de condiciones y asignaciones de estado y color
+        } else if (v.nombre == "008") {
+          estado = monthsDiff > 0 && monthsDiff <= 4 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 4) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+          // Agregar lógica para el nombre 008
+        } else if (v.nombre == "009") {
+          estado = monthsDiff > 0 && monthsDiff <= 4 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 4) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "010") {
+          estado = monthsDiff > 0 && monthsDiff <= 4 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 4) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "011") {
+          estado = monthsDiff > 0 && monthsDiff <= 4 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 4) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "012") {
+          estado = monthsDiff >= 0 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
+          if (monthsDiff >= 0 && monthsDiff <= 6) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "013") {
+          estado = monthsDiff >= 0 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
+          if (monthsDiff >= 0 && monthsDiff <= 6) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "014") {
+          estado = monthsDiff >= 0 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
+          if (monthsDiff >= 0 && monthsDiff <= 6) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "015") {
+          estado = monthsDiff > 0 && monthsDiff <= 7 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 7) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "016") {
+          estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 13) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "017") {
+          estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 13) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "018") {
+          estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 13) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "019") {
+          estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 13) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "020") {
+          estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 13) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "021") {
+          estado = monthsDiff >= 0 && monthsDiff <= 19 ? "En rango" : "Fuera de rango";
+          if (monthsDiff >= 0 && monthsDiff <= 19) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "022") {
+          estado = monthsDiff >= 0 && monthsDiff <= 19 ? "En rango" : "Fuera de rango";
+          if (monthsDiff >= 0 && monthsDiff <= 19) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "023") {
+          estado = monthsDiff >= 0 && monthsDiff <= 61 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 61) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "024") {
+          estado = monthsDiff >= 0 && monthsDiff <= 61 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 61) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        } else if (v.nombre == "025") {
+          estado = monthsDiff >= 0 && monthsDiff <= 61 ? "En rango" : "Fuera de rango";
+          if (monthsDiff > 0 && monthsDiff <= 61) {
+            color = e ? "green" : "orange";
+          } else {
+            color = e ? "red" : "yellow";
+          }
+        }
+
+        return { ...v, fechavacunacion: e ? e.fechavacunacion : "NA", estado, monthsDiff, color };
       });
+
+      mergedData.sort((a, b) => a.nombre - b.nombre);
+
       setPersonaData(mergedData);
       console.log(mergedData);
     } else {
@@ -235,8 +424,24 @@ export const HijosTable = (props) => {
             <Grid item xs={5}>
               {eps}
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={3}>
               Responsable menor: CC: {DocuRespon} {nombreRespon}
+            </Grid>
+            <Grid item xs={2}>
+              <div style={{ backgroundColor: "green", width: "20px", height: "20px" }}></div>
+              <span>En rango: Se vacuno a tiempo</span>
+            </Grid>
+            <Grid item xs={2}>
+              <div style={{ backgroundColor: "yellow", width: "20px", height: "20px" }}></div>
+              <span>Fuera del rango: No se ha vacunado</span>
+            </Grid>
+            <Grid item xs={2}>
+              <div style={{ backgroundColor: "orange", width: "20px", height: "20px" }}></div>
+              <span>En rango: ir a vacunarse</span>
+            </Grid>
+            <Grid item xs={2}>
+              <div style={{ backgroundColor: "red", width: "20px", height: "20px" }}></div>
+              <span>Fuera del rango: Se vacuno fuera del tiempo</span>
             </Grid>
           </Grid>
 
@@ -251,7 +456,7 @@ export const HijosTable = (props) => {
                   <TableCell>Nombre</TableCell>
                   <TableCell>Meses</TableCell>
                   <TableCell>FechaVacuna</TableCell>
-                  <TableCell>check</TableCell>
+                  <TableCell>Estado</TableCell>
                   <TableCell>Correo Alerta</TableCell>
                 </TableRow>
               </TableHead>
@@ -263,7 +468,15 @@ export const HijosTable = (props) => {
                     <TableCell>{item.meses}</TableCell>
                     <TableCell>{item.fechavacunacion}</TableCell>
                     <TableCell>
-                   
+                      {" "}
+                      <div
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          backgroundColor: item.color,
+                          margin: "0 auto",
+                        }}
+                      ></div>
                     </TableCell>
                     <TableCell>{item.correoAlerta}</TableCell>
                   </TableRow>

@@ -62,6 +62,44 @@ export const AuthProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const initialized = useRef(false);
 
+  // const initialize = async (email, password) => {
+  //   console.log(email,password, "aa")
+  //   // Evitar llamar dos veces en modo desarrollo con React.StrictMode habilitado
+  //   if (initialized.current) {
+  //     return;
+  //   }
+
+  //   initialized.current = true;
+
+  //   let isAuthenticated = false;
+
+  //   try {
+  //     isAuthenticated = window.sessionStorage.getItem("authenticated") === "true";
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+
+  //   if (isAuthenticated) {
+  //     const { data, error } = await supabase
+  //       .from("usuarios")
+  //       .select("*")
+  //       .eq("email", email)
+  //       .eq("pswd", password);
+
+  //     if (data && data.length > 0) {
+  //       const user = data[0];
+  //       dispatch({
+  //         type: HANDLERS.INITIALIZE,
+  //         payload: user,
+  //       });
+  //     } else {
+  //       dispatch({
+  //         type: HANDLERS.INITIALIZE,
+  //       });
+  //     }
+  //   }
+  // };
+
   const initialize = async () => {
     // Prevent from calling twice in development mode with React.StrictMode enabled
     if (initialized.current) {
@@ -78,18 +116,42 @@ export const AuthProvider = (props) => {
       console.error(err);
     }
 
-    if (isAuthenticated) {
-      const user = {
-        id: "5e86809283e28b96d2d38537",
-        avatar: "/assets/avatars/avatar-anika-visser.png",
-        name: "Anika Visser",
-        email: "anika.visser@devias.io",
-      };
+    console.log(isAuthenticated, "aaaa");
 
-      dispatch({
-        type: HANDLERS.INITIALIZE,
-        payload: user,
-      });
+    if (isAuthenticated) {
+      const email = window.sessionStorage.getItem("email");
+      const password = window.sessionStorage.getItem("password");
+
+      if (email && password) {
+        // Utilizar el correo electrónico y la contraseña guardados para la autenticación
+        const { data, error } = await supabase
+          .from("usuarios")
+          .select("*")
+          .eq("email", email)
+          .eq("pswd", password);
+
+        if (data && data.length > 0) {
+          const user = data[0];
+          dispatch({
+            type: HANDLERS.INITIALIZE,
+            payload: user,
+          });
+        } else {
+          dispatch({
+            type: HANDLERS.INITIALIZE,
+          });
+        }
+      } else {
+        // Manejar el caso en el que el correo electrónico o la contraseña son null
+        console.error(
+          "El correo electrónico o la contraseña no están definidos en el sessionStorage"
+        );
+      }
+
+      // dispatch({
+      //   type: HANDLERS.INITIALIZE,
+      //   payload: user,
+      // });
     } else {
       dispatch({
         type: HANDLERS.INITIALIZE,
@@ -105,26 +167,28 @@ export const AuthProvider = (props) => {
     []
   );
 
-  const skip = () => {
-
-  };
+  const skip = () => {};
 
   const signIn = async (email, password) => {
+    console.log(email, password, "eee");
     const { data, error } = await supabase
       .from("usuarios")
       .select("*")
       .eq("email", email)
       .eq("pswd", password);
-  
+
     if (data.length > 0) {
       const user = data[0]; // Obtener el primer usuario que coincida con el email y contraseña
-  
+
       try {
         window.sessionStorage.setItem("authenticated", "true");
+        window.sessionStorage.setItem("email", email); // Guardar el correo electrónico
+        window.sessionStorage.setItem("password", password);
       } catch (err) {
         console.error(err);
       }
-  
+
+      console.log(state, initialState, "que viene?");
       dispatch({
         type: HANDLERS.SIGN_IN,
         payload: user,
@@ -139,7 +203,6 @@ export const AuthProvider = (props) => {
   //   //   throw new Error('Please check your email and password');
   //   // }
 
-   
   //   const { data, error } = await supabase
   //     .from("usuarios")
   //     .select("*")
@@ -175,7 +238,8 @@ export const AuthProvider = (props) => {
         email: email,
       });
 
-      signIn("demo@devias.io", "Password123!");
+      console.log(email, password, "sinuo");
+      signIn(email, password);
     } catch (error) {
       console.log("error", error);
       throw new Error("Please check your email and password");

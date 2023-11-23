@@ -106,58 +106,68 @@ export const AuthProvider = (props) => {
   );
 
   const skip = () => {
-    try {
-      window.sessionStorage.setItem("authenticated", "true");
-    } catch (err) {
-      console.error(err);
-    }
 
-    const user = {
-      id: "5e86809283e28b96d2d38537",
-      avatar: "/assets/avatars/avatar-anika-visser.png",
-      name: "Anika Visser",
-      email: "anika.visser@devias.io",
-    };
-
-    dispatch({
-      type: HANDLERS.SIGN_IN,
-      payload: user,
-    });
   };
 
   const signIn = async (email, password) => {
-    // if (email !== 'demo@devias.io' || password !== 'Password123!') {
-    //   throw new Error('Please check your email and password');
-    // }
-
     const { data, error } = await supabase
       .from("usuarios")
       .select("*")
       .eq("email", email)
       .eq("pswd", password);
-
+  
     if (data.length > 0) {
+      const user = data[0]; // Obtener el primer usuario que coincida con el email y contraseña
+  
       try {
         window.sessionStorage.setItem("authenticated", "true");
       } catch (err) {
         console.error(err);
       }
-
-      const user = {
-        id: "5e86809283e28b96d2d38537",
-        avatar: "/assets/avatars/avatar-anika-visser.png",
-        name: "Anika Visser",
-        email: "anika.visser@devias.io",
-      };
-
+  
       dispatch({
         type: HANDLERS.SIGN_IN,
         payload: user,
       });
     } else {
-      throw new Error("Please check your email and password");
+      throw new Error("Por favor, verifique su correo electrónico y contraseña");
     }
   };
+
+  // const signIn = async (email, password) => {
+  //   // if (email !== 'demo@devias.io' || password !== 'Password123!') {
+  //   //   throw new Error('Please check your email and password');
+  //   // }
+
+   
+  //   const { data, error } = await supabase
+  //     .from("usuarios")
+  //     .select("*")
+  //     .eq("email", email)
+  //     .eq("pswd", password);
+
+  //   if (data.length > 0) {
+  //     try {
+  //       window.sessionStorage.setItem("authenticated", "true");
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+
+  //     const user = {
+  //       id: "5e86809283e28b96d2d38537",
+  //       avatar: "/assets/avatars/avatar-anika-visser.png",
+  //       name: "Anika Visser",
+  //       email: "anika.visser@devias.io",
+  //     };
+
+  //     dispatch({
+  //       type: HANDLERS.SIGN_IN,
+  //       payload: user,
+  //     });
+  //   } else {
+  //     throw new Error("Please check your email and password");
+  //   }
+  // };
 
   const signUp = async (email, name, password) => {
     try {
@@ -184,7 +194,6 @@ export const AuthProvider = (props) => {
     <AuthContext.Provider
       value={{
         ...state,
-        skip,
         signIn,
         signUp,
         signOut,

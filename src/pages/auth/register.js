@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Box, Button, Link, Stack, TextField, Typography } from '@mui/material';
 import { useAuth } from 'src/hooks/use-auth';
 import { Layout as AuthLayout } from 'src/layouts/auth/layout';
+import { supabase } from "src/supabase/client";
 
 const Page = () => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const Page = () => {
       password: '',
       submit: null
     },
+
     validationSchema: Yup.object({
       email: Yup
         .string()
@@ -32,9 +34,20 @@ const Page = () => {
         .max(255)
         .required('Password is required')
     }),
+
+    
     onSubmit: async (values, helpers) => {
       try {
-        await auth.signUp(values.email, values.name, values.password);
+        // Call Supabase client to insert user data into 'usuarios' table
+        const { data, error } = await supabase
+          .from('usuarios')
+          .insert([
+            { name: values.name,  login: values.email, email: values.email, pswd: values.password }
+          ]);
+        if (error) {
+          throw new Error(error.message);
+        }
+        // Redirect after successful sign up
         router.push('/');
       } catch (err) {
         helpers.setStatus({ success: false });
@@ -44,11 +57,12 @@ const Page = () => {
     }
   });
 
+  console.log(auth, "zonas-");
   return (
     <>
       <Head>
         <title>
-          Register | Devias Kit
+          Registrar usuario
         </title>
       </Head>
       <Box
@@ -73,7 +87,7 @@ const Page = () => {
               sx={{ mb: 3 }}
             >
               <Typography variant="h4">
-                Register
+                Registrar
               </Typography>
               <Typography
                 color="text.secondary"
@@ -145,7 +159,7 @@ const Page = () => {
                 type="submit"
                 variant="contained"
               >
-                Continue
+                Continuar
               </Button>
             </form>
           </div>

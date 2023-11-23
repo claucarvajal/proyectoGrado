@@ -71,7 +71,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          Login | Devias Kit
+          Login
         </title>
       </Head>
       <Box
@@ -99,21 +99,7 @@ const Page = () => {
               <Typography variant="h4">
                 Login
               </Typography>
-              <Typography
-                color="text.secondary"
-                variant="body2"
-              >
-                Don&apos;t have an account?
-                &nbsp;
-                <Link
-                  component={NextLink}
-                  href="/auth/register"
-                  underline="hover"
-                  variant="subtitle2"
-                >
-                  Register
-                </Link>
-              </Typography>
+             
             </Stack>
             <Tabs
               onChange={handleMethodChange}
@@ -182,21 +168,21 @@ const Page = () => {
                 >
                   Continue
                 </Button>
-                <Button
+                {/* <Button
                   fullWidth
                   size="large"
                   sx={{ mt: 3 }}
                   onClick={handleSkip}
                 >
                   Skip authentication
-                </Button>
+                </Button> */}
                 <Alert
                   color="primary"
                   severity="info"
                   sx={{ mt: 3 }}
                 >
                   <div>
-                    You can use <b>demo@devias.io</b> and password <b>Password123!</b>
+                    You can use <b>admin@gmail.com</b> and password <b>admin</b>
                   </div>
                 </Alert>
               </form>
@@ -207,10 +193,10 @@ const Page = () => {
                   sx={{ mb: 1 }}
                   variant="h6"
                 >
-                  Not available in the demo
+                  Mejoras a un futuro
                 </Typography>
                 <Typography color="text.secondary">
-                  To prevent unnecessary costs we disabled this feature in the demo.
+                  se puede hacer login con el número de tel, verificación de codigo al correo
                 </Typography>
               </div>
             )}

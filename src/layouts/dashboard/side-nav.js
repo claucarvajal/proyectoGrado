@@ -18,6 +18,7 @@ import { Scrollbar } from 'src/components/scrollbar';
 import { items } from './config';
 import { SideNavItem } from './side-nav-item';
 
+
 export const SideNav = (props) => {
   const { open, onClose } = props;
   const pathname = usePathname();
@@ -129,50 +130,7 @@ export const SideNav = (props) => {
             px: 2,
             py: 3
           }}
-        >
-          <Typography
-            color="neutral.100"
-            variant="subtitle2"
-          >
-            Need more features?
-          </Typography>
-          <Typography
-            color="neutral.500"
-            variant="body2"
-          >
-            Check out our Pro solution template.
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              mt: 2,
-              mx: 'auto',
-              width: '160px',
-              '& img': {
-                width: '100%'
-              }
-            }}
-          >
-            <img
-              alt="Go to pro"
-              src="/assets/devias-kit-pro.png"
-            />
-          </Box>
-          <Button
-            component="a"
-            endIcon={(
-              <SvgIcon fontSize="small">
-                <ArrowTopRightOnSquareIcon />
-              </SvgIcon>
-            )}
-            fullWidth
-            href="https://material-kit-pro-react.devias.io/"
-            sx={{ mt: 2 }}
-            target="_blank"
-            variant="contained"
-          >
-            Pro Live Preview
-          </Button>
+        >UTS 
         </Box>
       </Box>
     </Scrollbar>

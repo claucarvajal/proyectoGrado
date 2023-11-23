@@ -18,6 +18,7 @@ export const AccountPopover = (props) => {
     [onClose, auth, router]
   );
 
+
   return (
     <Popover
       anchorEl={anchorEl}
@@ -36,13 +37,14 @@ export const AccountPopover = (props) => {
         }}
       >
         <Typography variant="overline">
-          Account
+          Cuenta
         </Typography>
         <Typography
           color="text.secondary"
           variant="body2"
         >
-          Anika Visser
+            
+
         </Typography>
       </Box>
       <Divider />
@@ -57,7 +59,7 @@ export const AccountPopover = (props) => {
         }}
       >
         <MenuItem onClick={handleSignOut}>
-          Sign out
+          Salir
         </MenuItem>
       </MenuList>
     </Popover>

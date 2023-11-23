@@ -23,6 +23,7 @@ const Page = () => {
   const router = useRouter();
   const auth = useAuth();
   const [method, setMethod] = useState('email');
+  
   const formik = useFormik({
     initialValues: {
       email: 'demo@devias.io',

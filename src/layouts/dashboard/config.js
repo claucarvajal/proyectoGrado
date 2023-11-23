@@ -8,11 +8,10 @@ import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
 import { SvgIcon } from '@mui/material';
 import { BeakerIcon } from '@heroicons/react/24/solid'
-import { SideNavItem } from "./side-nav-item";
+import { useAuth } from "src/hooks/use-auth";
 
-// console.log(auth, "zonassssssssss-");
+// const auth = useAuth();
 
-console.log(SideNavItem)
 
 export const items = [
   {
@@ -86,6 +85,7 @@ export const items = [
         <UserPlusIcon />
       </SvgIcon>
     )
+
   },
   // {
   //   title: 'Error',

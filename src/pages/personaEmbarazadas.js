@@ -75,6 +75,7 @@ const Page = ({ persona, error }) => {
     embarazadas.departamento.toLowerCase().includes(searchValue.toLowerCase()) ||
     embarazadas.entidad.toLowerCase().includes(searchValue.toLowerCase()) ||
     embarazadas.municipio.toLowerCase().includes(searchValue.toLowerCase()) ||
+    embarazadas.cumple.toLowerCase().includes(searchValue.toLowerCase()) || 
     (embarazadas.documento && (embarazadas.documento.toString().toLowerCase().includes(searchValue.toLowerCase()) 
     || embarazadas.documento.toString().includes(searchValue))) || 
     (embarazadas.id && (embarazadas.id.toString().toLowerCase().includes(searchValue.toLowerCase()) 
@@ -116,9 +117,10 @@ const Page = ({ persona, error }) => {
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }
+                    style={{ background: "#a7bacc" }}
                     onClick={() => exportToExcel(filteredEmbarazadas)}
                   >
-                    Export
+                    CSV
                   </Button>
                 </Stack>
               </Stack>

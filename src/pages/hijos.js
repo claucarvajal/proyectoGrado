@@ -73,6 +73,7 @@ const Page = ({ persona, error }) => {
     hijos.nombres.toLowerCase().includes(searchValue.toLowerCase()) || 
     hijos.departamento.toLowerCase().includes(searchValue.toLowerCase()) ||
     hijos.entidad.toLowerCase().includes(searchValue.toLowerCase()) ||
+    hijos.cumple.toLowerCase().includes(searchValue.toLowerCase()) || 
     hijos.municipio.toLowerCase().includes(searchValue.toLowerCase()) ||
     (hijos.documento && (hijos.documento.toString().toLowerCase().includes(searchValue.toLowerCase()) 
     || hijos.documento.toString().includes(searchValue))) || 
@@ -115,9 +116,10 @@ const Page = ({ persona, error }) => {
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }
+                    style={{ background: "#a7bacc" }}
                     onClick={() => exportToExcel(filteredHijos)}
                   >
-                    Export
+                    CSV
                   </Button>
                 </Stack>
               </Stack>

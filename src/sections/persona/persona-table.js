@@ -116,21 +116,21 @@ export const PersonaTable = (props) => {
         if (monthsDiff >= 0 && monthsDiff <= 3) {
           color = evalItem.fechavisita ? "green" : "orange";
         } else {
-          color = evalItem.fechavisita ? "red" : "yellow";
+          color = evalItem.fechavisita ? "yellow" : "red";
         }
       } else if (evalItem.tipocontrol == "medio") {
         estado = monthsDiff > 0 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
         if (monthsDiff > 0 && monthsDiff <= 6) {
           color = evalItem.fechavisita ? "green" : "orange";
         } else {
-          color = evalItem.fechavisita ? "red" : "yellow";
+          color = evalItem.fechavisita ? "yellow" : "red";
         }
       } else if (evalItem.tipocontrol == "final") {
         estado = monthsDiff > 0 && monthsDiff <= 9 ? "En rango" : "Fuera de rango";
         if (monthsDiff > 0 && monthsDiff <= 9) {
           color = evalItem.fechavisita ? "green" : "orange";
         } else {
-          color = evalItem.fechavisita ? "red" : "yellow";
+          color = evalItem.fechavisita ? "yellow" : "red";
         }
       }
       return { ...evalItem, ...controlItem, estado, monthsDiff, color };
@@ -162,8 +162,8 @@ export const PersonaTable = (props) => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
+                  {/* <TableCell padding="checkbox"> */}
+                    {/* <Checkbox
                       checked={selectedAll}
                       indeterminate={selectedSome}
                       onChange={(event) => {
@@ -173,18 +173,19 @@ export const PersonaTable = (props) => {
                           onDeselectAll?.();
                         }
                       }}
-                    />
-                  </TableCell>
-                  <TableCell>Id</TableCell>
-                  <TableCell>TipoDoc</TableCell>
-                  <TableCell>documento</TableCell>
-                  <TableCell>Nombres</TableCell>
-                  <TableCell>Departamento</TableCell>
-                  <TableCell>Municipio</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Entidad</TableCell>
-                  <TableCell>Riesgo</TableCell>
-                  <TableCell>Inf</TableCell>
+                    /> */}
+                  {/* </TableCell> */}
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Id</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>TipoDoc</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>documento</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Nombres</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Departamento</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Municipio</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Email</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Entidad</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Riesgo</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Estado</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Inf</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -195,8 +196,8 @@ export const PersonaTable = (props) => {
 
                   return (
                     <TableRow hover key={persona.id} selected={isSelected}>
-                      <TableCell padding="checkbox">
-                        <Checkbox
+                      {/* <TableCell padding="checkbox"> */}
+                        {/* <Checkbox
                           checked={isSelected}
                           onChange={(event) => {
                             if (event.target.checked) {
@@ -205,8 +206,8 @@ export const PersonaTable = (props) => {
                               onDeselectOne?.(persona.id);
                             }
                           }}
-                        />
-                      </TableCell>
+                        /> */}
+                      {/* </TableCell> */}
                       <TableCell>{persona.id}</TableCell>
                       <TableCell>{persona.tipodoc}</TableCell>
                       <TableCell>{persona.documento}</TableCell>
@@ -216,6 +217,7 @@ export const PersonaTable = (props) => {
                       <TableCell>{persona.email}</TableCell>
                       <TableCell>{persona.entidad}</TableCell>
                       <TableCell>{persona.riesgo}</TableCell>
+                      <TableCell>{persona.cumple}</TableCell>
                       <TableCell>
                         <IconButton
                           onClick={() =>
@@ -360,7 +362,7 @@ export const PersonaTable = (props) => {
                 <span>Control realizado a tiempo</span>
               </Grid>
               <Grid item xs={3}>
-                <div style={{ backgroundColor: "yellow", width: "30%", height: "40px" }}></div>
+                <div style={{ backgroundColor: "red", width: "30%", height: "40px" }}></div>
                 <span>No se ha realizado control</span>
               </Grid>
               <Grid item xs={3}>
@@ -368,7 +370,7 @@ export const PersonaTable = (props) => {
                 <span>Próximo control recomendado</span>
               </Grid>
               <Grid item xs={3}>
-                <div style={{ backgroundColor: "red", width: "30%", height: "40px" }}></div>
+                <div style={{ backgroundColor: "yellow", width: "30%", height: "40px" }}></div>
                 <span>Control atrasado</span>
               </Grid>
             </Grid>

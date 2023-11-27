@@ -107,28 +107,28 @@ export const HijosTable = (props) => {
           if (monthsDiff >= 0 && monthsDiff <= 2) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "002") {
           estado = monthsDiff >= 0 && monthsDiff <= 2 ? "En rango" : "Fuera de rango";
           if (monthsDiff >= 0 && monthsDiff <= 2) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "004") {
           estado = monthsDiff >= 0 && monthsDiff <= 3 ? "En rango" : "Fuera de rango";
           if (monthsDiff >= 0 && monthsDiff <= 3) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "005") {
           estado = monthsDiff >= 0 && monthsDiff <= 3 ? "En rango" : "Fuera de rango";
           if (monthsDiff >= 0 && monthsDiff <= 3) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
           // Agregar lógica para el nombre 005
           // Puedes seguir el mismo patrón de condiciones y asignaciones de estado y color
@@ -137,7 +137,7 @@ export const HijosTable = (props) => {
           if (monthsDiff >= 0 && monthsDiff <= 3) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
           // Agregar lógica para el nombre 006
           // Puedes seguir el mismo patrón de condiciones y asignaciones de estado y color
@@ -146,7 +146,7 @@ export const HijosTable = (props) => {
           if (monthsDiff > 0 && monthsDiff <= 3) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
           // Agregar lógica para el nombre 007
           // Puedes seguir el mismo patrón de condiciones y asignaciones de estado y color
@@ -155,7 +155,7 @@ export const HijosTable = (props) => {
           if (monthsDiff > 0 && monthsDiff <= 4) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
           // Agregar lógica para el nombre 008
         } else if (v.nombre == "009") {
@@ -163,119 +163,119 @@ export const HijosTable = (props) => {
           if (monthsDiff > 0 && monthsDiff <= 4) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "010") {
           estado = monthsDiff > 0 && monthsDiff <= 4 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 4) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "011") {
           estado = monthsDiff > 0 && monthsDiff <= 4 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 4) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "012") {
           estado = monthsDiff >= 0 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
           if (monthsDiff >= 0 && monthsDiff <= 6) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "013") {
           estado = monthsDiff >= 0 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
           if (monthsDiff >= 0 && monthsDiff <= 6) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "014") {
           estado = monthsDiff >= 0 && monthsDiff <= 6 ? "En rango" : "Fuera de rango";
           if (monthsDiff >= 0 && monthsDiff <= 6) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "015") {
           estado = monthsDiff > 0 && monthsDiff <= 7 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 7) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "016") {
           estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 13) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "017") {
           estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 13) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "018") {
           estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 13) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "019") {
           estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 13) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "020") {
           estado = monthsDiff >= 0 && monthsDiff <= 13 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 13) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "021") {
           estado = monthsDiff >= 0 && monthsDiff <= 19 ? "En rango" : "Fuera de rango";
           if (monthsDiff >= 0 && monthsDiff <= 19) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "022") {
           estado = monthsDiff >= 0 && monthsDiff <= 19 ? "En rango" : "Fuera de rango";
           if (monthsDiff >= 0 && monthsDiff <= 19) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ?"yellow" : "red";
           }
         } else if (v.nombre == "023") {
           estado = monthsDiff >= 0 && monthsDiff <= 61 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 61) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "024") {
           estado = monthsDiff >= 0 && monthsDiff <= 61 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 61) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         } else if (v.nombre == "025") {
           estado = monthsDiff >= 0 && monthsDiff <= 61 ? "En rango" : "Fuera de rango";
           if (monthsDiff > 0 && monthsDiff <= 61) {
             color = e ? "green" : "orange";
           } else {
-            color = e ? "red" : "yellow";
+            color = e ? "yellow" : "red";
           }
         }
 
@@ -323,8 +323,8 @@ export const HijosTable = (props) => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
+                  {/* <TableCell padding="checkbox"> */}
+                    {/* <Checkbox
                       checked={selectedAll}
                       indeterminate={selectedSome}
                       onChange={(event) => {
@@ -334,17 +334,18 @@ export const HijosTable = (props) => {
                           onDeselectAll?.();
                         }
                       }}
-                    />
-                  </TableCell>
-                  <TableCell>Id</TableCell>
-                  <TableCell>TipoDoc</TableCell>
-                  <TableCell>documento</TableCell>
-                  <TableCell>Nombres</TableCell>
-                  <TableCell>Departamento</TableCell>
-                  <TableCell>Municipio</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Entidad</TableCell>
-                  <TableCell>Inf</TableCell>
+                    /> */}
+                  {/* </TableCell> */}
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Id</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>TipoDoc</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>documento</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Nombres</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Departamento</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Municipio</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Email</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Entidad</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Estado</TableCell>
+                  <TableCell style={{backgroundColor: "#a7bacc"}}>Inf</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -355,8 +356,8 @@ export const HijosTable = (props) => {
 
                   return (
                     <TableRow hover key={persona.id} selected={isSelected}>
-                      <TableCell padding="checkbox">
-                        <Checkbox
+                      {/* <TableCell padding="checkbox"> */}
+                        {/* <Checkbox
                           checked={isSelected}
                           onChange={(event) => {
                             if (event.target.checked) {
@@ -365,8 +366,8 @@ export const HijosTable = (props) => {
                               onDeselectOne?.(persona.id);
                             }
                           }}
-                        />
-                      </TableCell>
+                        /> */}
+                      {/* </TableCell> */}
                       <TableCell>{persona.id}</TableCell>
                       <TableCell>{persona.tipodoc}</TableCell>
                       <TableCell>{persona.documento}</TableCell>
@@ -375,6 +376,7 @@ export const HijosTable = (props) => {
                       <TableCell>{persona.municipio}</TableCell>
                       <TableCell>{persona.email}</TableCell>
                       <TableCell>{persona.entidad}</TableCell>
+                      <TableCell>{persona.cumple}</TableCell>
                       <TableCell>
                         <IconButton
                           onClick={() =>
@@ -500,7 +502,7 @@ export const HijosTable = (props) => {
                 <span>Control realizado a tiempo</span>
               </Grid>
               <Grid item xs={3}>
-                <div style={{ backgroundColor: "yellow", width: "30%", height: "40px" }}></div>
+                <div style={{ backgroundColor: "red", width: "30%", height: "40px" }}></div>
                 <span>No se ha realizado control</span>
               </Grid>
               <Grid item xs={3}>
@@ -508,7 +510,7 @@ export const HijosTable = (props) => {
                 <span>Próximo control recomendado</span>
               </Grid>
               <Grid item xs={3}>
-                <div style={{ backgroundColor: "red", width: "30%", height: "40px" }}></div>
+                <div style={{ backgroundColor: "yellow", width: "30%", height: "40px" }}></div>
                 <span>Control atrasado</span>
               </Grid>
             </Grid>

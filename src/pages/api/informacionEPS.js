@@ -35,6 +35,7 @@ export default async function handler(req, res) {
       regimen: persona.regimen,
       fechaembarazo: persona.fechaembarazo,
       riesgo: persona.riesgo,
+      cumple: persona.cumple,
     };
   
     // Insert or update in the 'personasintermedia' table
@@ -102,7 +103,8 @@ export default async function handler(req, res) {
         entidad: persona.entidad,
         regimen: persona.regimen,
         fechaembarazo: "",
-        riesgo:""
+        riesgo:"",
+        cumple:hijo.cumple
       };
     
       // Insert or update in the 'personasintermedia' table

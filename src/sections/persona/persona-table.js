@@ -18,6 +18,7 @@ import {
   DialogContent,
   TableContainer,
   Paper,
+  Tooltip,
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
@@ -30,6 +31,7 @@ import { differenceInMonths } from "date-fns";
 import { supabase } from "src/supabase/client";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
+import HelpIcon from "@mui/icons-material/Help";
 
 export const PersonaTable = (props) => {
   const {
@@ -57,6 +59,16 @@ export const PersonaTable = (props) => {
   const [meses, setMeses] = useState("");
   const [riesgo, setRiesgo] = useState("");
   const [personaData, setPersonaData] = useState([]);
+
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+
+  const handleTooltipOpen = () => {
+    setTooltipOpen(true);
+  };
+
+  const handleTooltipClose = () => {
+    setTooltipOpen(false);
+  };
 
   const handleOpenLayer = async (
     name,
@@ -239,7 +251,9 @@ export const PersonaTable = (props) => {
         />
       </Card>
       <Dialog open={open} onClose={handleClose} maxWidth="lg">
-        <DialogTitle>Histórico embarazo</DialogTitle>
+        <DialogTitle style={{ backgroundColor: "#2196F3", color: "white" }}>
+          Histórico embarazo
+        </DialogTitle>
         <DialogContent>
           <Grid container>
             {/* <Grid item xs={12}></Grid> */}
@@ -280,7 +294,7 @@ export const PersonaTable = (props) => {
               {meses}
             </Grid>
             <Grid item xs={2}>
-              Embarazo alto riego:
+              Embarazo alto riesgo:
             </Grid>
             {riesgo === "SI" ? (
               <Grid item xs={1} style={{ color: "red", fontWeight: "bold" }}>
@@ -291,23 +305,6 @@ export const PersonaTable = (props) => {
                 {riesgo}
               </Grid>
             )}
-
-            <Grid item xs={2}>
-              <div style={{ backgroundColor: "green", width: "20px", height: "20px" }}></div>
-              <span>En rango: fecha de control</span>
-            </Grid>
-            <Grid item xs={2}>
-              <div style={{ backgroundColor: "yellow", width: "20px", height: "20px" }}></div>
-              <span>Fuera del rango: No se ha hecho control</span>
-            </Grid>
-            <Grid item xs={2}>
-              <div style={{ backgroundColor: "orange", width: "20px", height: "20px" }}></div>
-              <span>En rango: por favor hacerse el control</span>
-            </Grid>
-            <Grid item xs={2}>
-              <div style={{ backgroundColor: "red", width: "20px", height: "20px" }}></div>
-              <span>Fuera del rango: Fecha de control</span>
-            </Grid>
           </Grid>
 
           <Grid item xs={4} style={{ fontWeight: "bold", marginTop: "20px" }}>
@@ -321,7 +318,7 @@ export const PersonaTable = (props) => {
                   <TableCell>descripción</TableCell>
                   <TableCell>FechaVisita</TableCell>
                   <TableCell>Estado</TableCell>
-                  <TableCell>Correo Alerta</TableCell>
+                  {/* <TableCell>Correo Alerta</TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -340,13 +337,47 @@ export const PersonaTable = (props) => {
                         }}
                       ></div>
                     </TableCell>
-                    <TableCell>{item.estado}</TableCell>{" "}
+                    {/* <TableCell>{item.estado}</TableCell>{" "} */}
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
         </DialogContent>
+        {/* Agrega el botón de ayuda */}
+        <IconButton onClick={handleTooltipOpen} style={{ position: "absolute", top: 5, right: 35 }}>
+          <HelpIcon />
+        </IconButton>
+
+        {/* Agrega el tooltip */}
+        <Tooltip
+          open={tooltipOpen}
+          onClose={handleTooltipClose}
+          title={
+            <Grid container>
+              <Grid item xs={3}>
+                <div style={{ backgroundColor: "green", width: "30%", height: "40px" }}></div>
+                <span>Control realizado a tiempo</span>
+              </Grid>
+              <Grid item xs={3}>
+                <div style={{ backgroundColor: "yellow", width: "30%", height: "40px" }}></div>
+                <span>No se ha realizado control</span>
+              </Grid>
+              <Grid item xs={3}>
+                <div style={{ backgroundColor: "orange", width: "30%", height: "40px" }}></div>
+                <span>Próximo control recomendado</span>
+              </Grid>
+              <Grid item xs={3}>
+                <div style={{ backgroundColor: "red", width: "30%", height: "40px" }}></div>
+                <span>Control atrasado</span>
+              </Grid>
+            </Grid>
+          }
+          arrow
+          placement="left"
+        >
+          <IconButton style={{ position: "absolute", top: 5, right: 5 }}>x</IconButton>
+        </Tooltip>
         <IconButton onClick={handleClose} style={{ position: "absolute", top: 5, right: 5 }}>
           x
         </IconButton>

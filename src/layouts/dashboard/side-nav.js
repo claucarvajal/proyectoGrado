@@ -102,6 +102,13 @@ export const SideNav = (props) => {
             }}
           >
             {items.map((item) => {
+              if (auth.user != null ) {
+                if (item.title === "registrar" && auth.user.name !== "SuperAdmin" ) {
+                  return <></>; // No renderizar el item
+                }
+              }
+        
+
               const active = item.path ? pathname === item.path : false;
 
               return (
